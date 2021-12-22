@@ -1,0 +1,129 @@
+@charset "UTF-8";
+/* 초기화 :브라우저에서 제공하는 것을초기화 할거임 */
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	font-family: sans-serif;
+	width: 100%;
+	padding-top: 38px;
+	padding-bottom: 20px;
+	background-color: white;
+	color: #666;
+	line-height: 17px;
+	font-size: 0.75em;
+}
+
+li {
+	list-style: none;
+}
+
+a {
+	text-decoration: none;
+}
+
+img {
+	border: 0;
+}
+
+/*  */
+#container {
+	position: relative;
+	width: 985px;
+	padding-bottom: 60px;
+	width: 100%;
+	background-color: white;
+	padding: 20px 0 50px 0;
+	margin-left: 25%;
+}
+
+#contents_sub {
+	float: left;
+	width: 890px;
+	min-height: 300px;
+	margin: 15px 35px 0 48px;
+	padding: 0;
+	display: inline;
+}
+
+#content_location {
+	position: relative;
+	width: 100%;
+	height: 50px;
+}
+
+.toptitle {
+	color: #666;
+	font-size: 40px;
+	font-weight: bold;
+	letter-spacing: -1px;
+	overflow: hidden;
+	line-height: 50px;
+}
+
+#title-line {
+	margin-top: 10px;
+	border: 3px solid pink;
+}
+
+.left-list {
+	padding-top: 30px; float : left;
+	border: 0px solid black;
+	min-height: 500px;
+	float: left;
+}
+
+.right-list {
+	padding-top: 30px;
+	float: left;
+	border: 0px solid black;
+	width: 305px;
+	margin-left: 20px;
+	min-height: 500px;
+}
+
+.class-form {
+	margin-bottom: 25px;
+}
+
+.list-title {
+	padding: 8px 0 15px 10px;
+	background-color: #eee;
+}
+
+.site-background-color {
+	background-color: pink !important;
+}
+
+.red-line {
+	height: 2px;
+	width: 100%;
+	margin-bottom: 2px;
+}
+
+.class-form li {
+	padding: 15px 10px 0 25px;
+	cursor: pointer;
+}
+a{
+	line-height: 20px;
+	font-size: 0.75em;
+	color : #666;
+}
+p{
+	line-height: 20px;
+	font-size: 0.75em;
+	color : #ff3385;
+}
+.step-box {
+	border: 1px solid #bbb;
+	padding-bottom: 20px;
+	margin-bottom: 20px;
+	min-height: 175px;
+}
+
+.step-box li {
+	padding: 10px 10px 0 20px;
+}

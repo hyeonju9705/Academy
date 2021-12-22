@@ -1,0 +1,190 @@
+/* 초기화 :브라우저에서 제공하는 것을초기화 할거임 */
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	font-family: sans-serif;
+	width: 100%;
+	padding-top: 38px;
+	padding-bottom: 20px;
+}
+
+li {
+	list-style: none;
+}
+
+a {
+	text-decoration: none;
+}
+
+img {
+	border: 0;
+}
+
+.total_content {
+	margin-top: 50px;
+	width: 975px;
+	height: 700px;
+	background-color: white;
+}
+
+/* contentBox 본문 */
+.contentBox {
+	margin-top: 30px;
+	margin-bottom: 100px;
+}
+
+/* leftbar 수강과목 */
+.site-font-color {
+	font-weight: bold;
+	line-height: 40px;
+	font-size: 20px;
+	color: pink;
+}
+
+div.container {
+	float: left;
+	border: 1px solid black;
+	text-align: center;
+	line-height: 50px;
+	width: 150px;
+	display: block;
+	padding: 5px 0 5px 0;
+	background-color: #f8f8f8;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+.select:hover {
+	background-color: pink;
+}
+
+/* 글쓰기 뷰 */
+.hrStyle {
+	margin-top: 10px;
+	margin-bottom: 25px;
+}
+
+/* size */
+.size710 {
+	width: 710px !important;
+	margin-left: 50px;
+}
+
+.title {
+	font-weight: bold;
+	line-height: 40px;
+	font-size: 30px;
+	color: black;
+}
+
+.gray_btn_down {
+	width: 100px;
+	height: 40px;
+	border-radius: 10%;
+	border: 0px;
+	background-color: #ededed;
+	color: black;
+	font-weight: 700;
+	margin: 5px;
+}
+
+.orange_smallarea {
+	width: 550px !important;
+	height: 70px !important;
+	padding: 10px !important;
+	box-sizing: border-box !important;
+	border: solid 2px #ededed !important;
+	border-radius: 5px !important;
+	font-size: 16px !important;
+	resize: both !important;
+}
+
+.gray_btn_big {
+	width: 100px;
+	height: 70px;
+	border-radius: 10%;
+	border: 0px;
+	background-color: #ededed;
+	color: black;
+	font-weight: 700;
+	float: right;
+	margin: 0px 5px 5px 5px;
+}
+
+table {
+	font-size: 12px;
+	border-top: 1px solid #dadada;;
+	padding-bottom: 20px;
+}
+
+.tablebgtable100 {
+	border-bottom: 1px solid #bbb;
+	width: 100px;
+	height: 40px;
+	background: #ebeaeae3;
+	padding: 20px;
+	text-align: center;
+}
+
+.tablebg2 {
+	border-bottom: 1px solid #bbb;
+	width: 700px;
+	padding-left: 10px;
+}
+
+/* 현주 */
+.thumbnail {
+	float: left;
+}
+
+.description {
+	float: left;
+	margin-left: 10px;
+	width: 80;
+	height: 60;
+}
+
+.description>strong {
+	display: block;
+	width: 170px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.tab_image_size {
+	width: 60px;
+	height: 60px;
+}
+
+.tab_item>ul {
+	margin-left: -2px !important;
+	margin-top: -10px;
+}
+
+.nameBigbox {
+	padding-right: 0px;
+}
+
+.gray_btn {
+	width: 100px;
+	height: 40px;
+	border-radius: 10%;
+	border: 0px;
+	background-color: #ededed;
+	color: black;
+	font-weight: 700;
+	float: right;
+	margin: 5px;
+}
+
+.dottHr {
+	border: none;
+	border-top: 1px dotted #ededed;
+	color: #fff;
+	background-color: #fff;
+	height: 1px;
+}
