@@ -80,15 +80,16 @@ public class AcademyDAO {
 		}
 	} // 연결 닫기
 
-	public ArrayList<NoticeVO> selectNoticeAll() {
+	public ArrayList<NoticeVO> selectNoticeAll(String subjectName) {
 		ArrayList<NoticeVO> nl = new ArrayList<NoticeVO>();
 
-		sql = "select * from Notice";
+		sql = "select * from Notice where subjectName= ?";
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, subjectName);
 			rs = pstmt.executeQuery();
-
+			
 			while (rs.next()) {
 				nl.add(new NoticeVO(rs.getInt("boardNo"), rs.getString("userId"), rs.getString("title"),
 						rs.getString("regDate"), rs.getInt("hit")));
@@ -166,7 +167,7 @@ public class AcademyDAO {
 					user.setUserId(userId); //아이디
 					map.put("key", ok);
 					map.put("user", user);
-				} else /* if (!rs.getString(1).equals(userPwd)) */ {
+				} else  {
 					ok = 2; // 비밀번호 불일치 (회원이면서)
 					map.put("key", ok);
 					map.put("user", user); //유저는 초기 상태임
@@ -179,7 +180,6 @@ public class AcademyDAO {
 
 			close(conn, pstmt, rs);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return map;
@@ -212,7 +212,7 @@ public class AcademyDAO {
 	}
 
 	public int insertNotice(NoticeVO vo) { // 공지사항 저장
-		sql = "insert into notice(userId,title,content) values(?,?,?)";
+		sql = "insert into notice(userId,title,content,subjectName) values(?,?,?,?)";
 		int count = 0;
 		try {
 			pstmt = getConnection().prepareStatement(sql);
@@ -220,6 +220,7 @@ public class AcademyDAO {
 			pstmt.setString(1, vo.getUserId());
 			pstmt.setString(2, vo.getTitle());
 			pstmt.setString(3, vo.getContent());
+			pstmt.setString(4, vo.getSubjectName());
 
 			count = pstmt.executeUpdate();
 			close(conn, pstmt);
@@ -271,6 +272,25 @@ public class AcademyDAO {
 		try {
 			pstmt = getConnection().prepareStatement(sql);
 			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				NoticeVO nvo2 = new NoticeVO(rs.getString(1), rs.getString(2));
+				bvo.add(nvo2);
+			}
+			close(conn, pstmt, rs);
+		} catch (SQLException e) {
+			e.getMessage();
+		}
+		return bvo;
+	}
+	
+	public List<NoticeVO> selectBoardAll2(String subjectName) {
+		List<NoticeVO> bvo = new ArrayList<NoticeVO>();
+		sql = "select title, subjectName from notice where subjectName=?";
+		try {
+			pstmt = getConnection().prepareStatement(sql);
+			pstmt.setString(1, subjectName);
+			rs = pstmt.executeQuery();
+			System.out.println("DAO : " + subjectName);
 			while (rs.next()) {
 				NoticeVO nvo2 = new NoticeVO(rs.getString(1), rs.getString(2));
 				bvo.add(nvo2);
@@ -645,7 +665,7 @@ public class AcademyDAO {
       }
      
      public int insertFile(FileVO vo) { // 강의자료 등록
- 		sql = "insert into datalab(userId,title,content,fileName) values(?,?,?,?)";
+ 		sql = "insert into datalab(userId,title,content,fileName,subjectName) values(?,?,?,?,?)";
  		int count = 0;
  		try {
  			pstmt = getConnection().prepareStatement(sql);
@@ -654,6 +674,7 @@ public class AcademyDAO {
  			pstmt.setString(2, vo.getTitle());
  			pstmt.setString(3, vo.getContent());
  			pstmt.setString(4, vo.getFileName());
+ 			pstmt.setString(5, vo.getSubjectName());
 
  			count = pstmt.executeUpdate();
  			close(conn, pstmt);
@@ -664,18 +685,19 @@ public class AcademyDAO {
  		return count;
  	}
      
-     public ArrayList<FileVO> selectFileAll() { //강의자료 전체보기
+     public ArrayList<FileVO> selectFileAll(String subjectName) { //강의자료 전체보기
  		ArrayList<FileVO> fl = new ArrayList<FileVO>();
 
- 		sql = "select * from datalab";
+ 		sql = "select * from datalab where subjectName=?";
  		try {
  			conn = getConnection();
  			pstmt = conn.prepareStatement(sql);
+ 			pstmt.setString(1, subjectName);
  			rs = pstmt.executeQuery();
 
  			while (rs.next()) {
- 				fl.add(new FileVO(rs.getInt("boardNo"), rs.getString("userId"), rs.getString("title"),
- 						rs.getString("content"), rs.getString("fileName"), rs.getString("regDate")));
+ 				fl.add(new FileVO(rs.getInt(1), rs.getString(2), rs.getString(3),
+ 						rs.getString(4), rs.getString(5), rs.getString(6)));
  			}
 
  			close(conn, pstmt, rs);
@@ -688,6 +710,21 @@ public class AcademyDAO {
 
  	}
      
+     public int deleteFile(Integer boardNo) {
+ 		sql = "delete from datalab where boardNo=?";
+ 		int num = 0;
+ 		try {
+ 			pstmt = getConnection().prepareStatement(sql);
+ 			pstmt.setInt(1, boardNo);
+
+ 			num = pstmt.executeUpdate();
+ 			close(conn, pstmt);
+ 		} catch (SQLException e) {
+ 			e.printStackTrace();
+ 		}
+ 		return num;
+
+ 	}
      public FileVO selectFile(Integer boardNo) {
  		sql = "select * from datalab where boardNo=?";
  		PreparedStatement pstmt;
@@ -706,6 +743,117 @@ public class AcademyDAO {
  			e.printStackTrace();
  		}
  		return fvo;
+ 	}
+     
+  // 강의계획서
+ 	public List<SyllabusVO> selectSyllabus(String subjectName) { // subject_main.jsp에서 강의계획서 띄우기
+ 		List<SyllabusVO> svo = new ArrayList<SyllabusVO>();
+ 		sql = "select weekday,title, subjectName  from syllabus where subjectName = ?";
+ 		try {
+ 			conn = getConnection();
+ 			pstmt = conn.prepareStatement(sql);
+ 			pstmt.setString(1, subjectName);
+ 			rs = pstmt.executeQuery();
+ 			while (rs.next()) {
+ 				SyllabusVO svo2 = new SyllabusVO(rs.getString(1), rs.getString(2), rs.getString(3));
+ 				svo.add(svo2);
+ 			}
+ 			conn.close();
+ 			pstmt.close();
+ 			rs.close();
+ 		} catch (SQLException e) {
+ 			e.getMessage();
+ 		}
+ 		return svo;
+ 	}
+
+ 	public SyllabusVO selectSyllabus2(int syllabusNo) {
+ 		//List<SyllabusVO> svo = new ArrayList<SyllabusVO>();
+ 		SyllabusVO svo2 = null;
+ 		sql = "select weekday,title, content, subjectName  from syllabus where syllabusNo=?";
+ 		try {
+ 			conn = getConnection();
+ 			pstmt = conn.prepareStatement(sql);
+ 			pstmt.setInt(1, syllabusNo);
+ 			rs = pstmt.executeQuery();
+ 			if(rs.next()) {
+ 				 svo2 = new SyllabusVO(syllabusNo, rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4));
+ 				
+ 			}
+ 			conn.close();
+ 			pstmt.close();
+ 			rs.close();
+ 		} catch (SQLException e) {
+ 			e.getMessage();
+ 		}
+ 		return svo2;
+ 	}
+
+ 	public List<SyllabusVO> selectSyllabusAll(String subjectName) { // 강의계획서 모든 리스트 보기
+ 		List<SyllabusVO> svo = new ArrayList<SyllabusVO>();
+ 		sql = "select syllabusNo, weekday,title,content,subjectName from syllabus where subjectName = ?";
+ 		try {
+ 			pstmt = getConnection().prepareStatement(sql);
+ 			pstmt.setString(1, subjectName);
+ 			rs = pstmt.executeQuery();
+ 			while (rs.next()) {
+ 				SyllabusVO svo2 = new SyllabusVO(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4),
+ 						rs.getString(5));
+ 				svo.add(svo2);
+ 			}
+ 			close(conn, pstmt, rs);
+ 		} catch (SQLException e) {
+ 			e.getMessage();
+ 		}
+ 		return svo;
+ 	}
+
+ 	public int SyllabusCheck(String userId) {	//이거 지금 맛감 주석달아둬도됨
+ 		sql = "select division from User where userid = ?";
+ 		rs = null;
+ 		int ok = 0;
+
+ 		try {
+ 			pstmt = getConnection().prepareStatement(sql);
+ 			pstmt.setString(1, userId);
+ 			rs = pstmt.executeQuery();
+
+ 			if (rs.next()) {
+ 				if (rs.getInt(1) == 1) { // ok가 1이면 강사
+ 					ok = 1;
+ 				} else if (rs.getInt(1) == 0) { // ok가 0이면 학생
+ 					ok = 0;
+ 				}
+ 			}
+ 			close(conn, pstmt, rs);
+
+ 		} catch (SQLException e) {
+ 			// TODO Auto-generated catch block
+ 			e.printStackTrace();
+ 		}
+ 		return ok;
+ 	}
+
+ 	public int updateSyllabus(SyllabusVO vo) {
+ 		sql = "update Syllabus set title=?, content=? where weekDay=? and subjectName = ? and syllabusNo = ?";
+
+ 		int num = 0;
+ 		try {
+ 			pstmt = getConnection().prepareStatement(sql);
+
+ 			pstmt.setString(1, vo.getTitle());
+ 			pstmt.setString(2, vo.getContent());
+ 			pstmt.setString(3, vo.getWeekDay());
+ 			pstmt.setString(4, vo.getSubjectName());
+ 			pstmt.setInt(5, vo.getSyllabusNo());
+
+ 			num = pstmt.executeUpdate();
+ 			close(conn, pstmt);
+ 		} catch (SQLException e) {
+ 			// TODO Auto-generated catch block
+ 			e.printStackTrace();
+ 		}
+ 		return num;
  	}
     
 }

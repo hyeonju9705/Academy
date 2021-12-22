@@ -20,17 +20,18 @@
 					<form name="input" action="getfeedback.html" method="get">
 						<p>${user.subjectName }</p>
 						<ul class="select">
-							<li id="menu_item">강의계획서</li>
-						</ul>
+                     <li id="menu_item"
+                     onclick="location.href='syllabus.do?subjectName=<%=request.getParameter("subjectName")%>'">강의계획서</li>
+                  		</ul>
 						<ul class="select">
 							<li id="menu_notice"
-								onclick="location.href='viewProc.do?userId=<%=session.getAttribute("userId")%>'">공지사항</li>
+								onclick="location.href='viewProc.do?userId=<%=session.getAttribute("userId")%>&subjectName=${user.subjectName}'">공지사항</li>
 						</ul>
 						<ul class="select">
 							<li id="menu_qna">질의응답</li>
 						</ul>
 						<ul class="select">
-							<li id="menu_inforoom" onclick="location.href='dataViewProc.do?userId=<%=session.getAttribute("userId")%>'">자료실</li>
+							<li id="menu_inforoom" onclick="location.href='dataViewProc.do?userId=<%=session.getAttribute("userId")%>&subjectName=${user.subjectName}'">자료실</li>
 						</ul>
 						<ul class="select">
 							<li id="menu_report" onclick="location.href='hwViewProc.do?userId=<%=session.getAttribute("userId")%>'">과제</li>
@@ -39,7 +40,7 @@
 				</div>
 			</div>
 			<div class="col-lg-7 nameBigbox">
-				<div class="subject_namebox">모두의 스타트업 코딩</div>
+				<div class="subject_namebox">${user.subjectName }</div>
 				<div class="subject_namebox">
 					<div class="">
 						<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
@@ -73,6 +74,12 @@
 					</ul>
 
 				</div>
+				<div class="subject_namebox">
+                  <p><b>강의 계획서</b> <br>
+                  <c:forEach var="sylla" items="${sylla }">
+                     <p>[${sylla.weekDay }] ${sylla.title}</p>
+                  </c:forEach>
+               </div>
 			</div>
 			<div class="col-lg-3 bg-box4">
 

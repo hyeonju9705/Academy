@@ -19,20 +19,16 @@ padding: 30px;
 </style>
 </head>
 <script type="text/javascript">
-
 <%String userId = session.getId();
-int ok = (Integer) request.getAttribute("ok");
-System.out.println("from view : "+ (int) request.getAttribute("ok"));
 if (request.getHeader("referer").equals("http://localhost:9000/Academy/login.jsp")) {
+   int ok = (Integer) request.getAttribute("ok");
    if (ok == 1) { //아이디 비번 일치, 회원이면서 비번 일치
-	   System.out.println("from jsp : ok");
       session.setAttribute("user", request.getAttribute("user"));
-      session.setAttribute("userId", request.getParameter("userId"));
-      System.out.println("asd" + request.getParameter("userId"));%>
+      session.setAttribute("userId", request.getParameter("userId"));%>
        alert('환영합니다. 아카데미 홈페이지에 방문해주셔서 감사합니다.');
     //   
  
-<%System.out.println("from 1 : " +ok);
+<%
     } else if (ok == 2) {%> //회원이면서 비번 불일치
 alert('비밀번호가 틀렸습니다. 확인 후 로그인 바랍니다.');
 
@@ -40,16 +36,9 @@ alert('비밀번호가 틀렸습니다. 확인 후 로그인 바랍니다.');
 <%
 } else {
 %>
-
-
       alert('아이디가 틀렸습니다. 확인 후 로그인 바랍니다.'); //비회원임
        location.href='<%=request.getContextPath()%>/login.jsp';
 <%}
-} else {
-session.setAttribute("user", session.getAttribute("user"));
-session.setAttribute("userId", session.getAttribute("userId"));
-
-userId = (String) session.getAttribute("userId");
 }%>   
 </script>
 
@@ -95,23 +84,23 @@ userId = (String) session.getAttribute("userId");
 					<span>수강과목</span>
 				</div>
 				<ol>
-					<li class="term_info" style="color:#ff3385;">정규 수업</li>
+					<li class="term_info" style="color: #ff3385;">정규 수업</li>
 					<li
 						style="padding-left: 10px; background: url('projectImages/ul_dot.png') no-repeat 0 49%">
 						<a name="subjectName" type="button"
-							onclick="location.href='mainform.do?subjectName=C'">C언어
+						onclick="location.href='mainform.do?subjectName=C'">C언어
 							(1017-01)</a> <!-- <a href="mainform.do">C언어 (1017-01)</a> -->
 					</li>
 					<li
 						style="padding-left: 10px; background: url('projectImages/ul_dot.png') no-repeat 0 49%">
 						<a name="subjectName" type="button"
-							onclick="location.href='mainform.do?subjectName=JAVA'">
-							JAVA (1008-01)</a>
+						onclick="location.href='mainform.do?subjectName=JAVA'"> JAVA
+							(1008-01)</a>
 					</li>
 					<li
 						style="padding-left: 10px; background: url('projectImages/ul_dot.png') no-repeat 0 49%">
 						<a name="subjectName" type="button"
-							onclick="location.href='mainform.do?subjectName=Python}'">
+						onclick="location.href='mainform.do?subjectName=Python'">
 							Python (1010-01)</a>
 					</li>
 					<li style="border-bottom: 1px dotted #E6E6E6;"></li>
@@ -176,9 +165,11 @@ userId = (String) session.getAttribute("userId");
 				</div>
 
 				<div class="icon-faq">
-					<img src="projectImages/faq.png">
-					<div class="iconn-my">FAQ</div>
-				</div>
+               <a href="qnaForm.jsp"><img src="projectImages/faq.png"></a>
+               <div class="iconn-my">
+                  <a href="qnaForm.jsp">FAQ</a>
+               </div>
+            	</div>
 
 
 			</fieldset>

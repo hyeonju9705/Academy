@@ -97,15 +97,7 @@
 							</c:if>
 						</form>
 						<button class="gray_btn_down"
-							onclick="location.href='<%=request.getContextPath()%>/dataViewProc.do'">목록</button>
-						<c:choose>
-						<c:when test="${commentCount ==0 }">
-						<button class="gray_btn_down" onclick="commentToggle()">댓글(0)</button>
-						</c:when>
-						<c:otherwise>
-						<button class="gray_btn_down" onclick="commentToggle()">댓글(${commentCount})</button>
-						</c:otherwise>
-						</c:choose>
+							onclick="location.href='<%=request.getContextPath()%>/dataViewProc.do?subjectName=${user.subjectName}'">목록</button>
 						
 						<form method="post"
 							action="<%=request.getContextPath()%>/cWriteProc.do">
@@ -140,14 +132,5 @@
 	<jsp:include page="footer.jsp" />
 
 </body>
-<script>
-	function commentToggle() {
-		var element = document.getElementById("commentBtn");
-		if (element.style.display === "none") {
-			element.style.display = "block";
-		} else {
-			element.style.display = "none";
-		}
-	}
-</script>
+
 </html>

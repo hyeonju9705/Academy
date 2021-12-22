@@ -54,6 +54,7 @@
 				
 					<form method="post" action="<%=request.getContextPath()%>/writeProc.do">
 						<input type="hidden" value="<%=session.getAttribute("userId")%>" name="userId">
+						<input type="hidden" value="${user.subjectName }" name="subjectName">
 						<input type="text" class="orange_text" placeholder="제목" name="title"> <br>
 						<textarea class="orange_area" placeholder="내용" name="content"></textarea>
 						<input type="submit" value="저장" class="orange_btn"> <input

@@ -95,7 +95,7 @@
 							</c:if>
 						</form>
 						<button class="gray_btn_down"
-							onclick="location.href='<%=request.getContextPath()%>/viewProc.do'">목록</button>
+							onclick="location.href='<%=request.getContextPath()%>/viewProc.do?subjectName=${user.subjectName}'">목록</button>
 						<c:choose>
 						<c:when test="${commentCount ==0 }">
 						<button class="gray_btn_down" onclick="commentToggle()">댓글(0)</button>

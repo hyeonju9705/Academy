@@ -29,10 +29,11 @@ public class NoticeVO {
 		this.content = content;
 	}
 	
-	public NoticeVO(String userId, String title, String content) {
+	public NoticeVO(String userId, String title, String content, String subjectName) {
 		this.userId = userId;
 		this.title = title;
 		this.content = content;
+		this.subjectName=subjectName;
 	}
 	
 	public NoticeVO(int boardNo, String userId, String title, String regDate, int hit) {

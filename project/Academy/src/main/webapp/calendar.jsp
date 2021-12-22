@@ -12,6 +12,10 @@ p {
   font-size:12px;
 }
 table {border: collapse;}
+tr{
+color : #666;}
+center{
+color : #666;}
 </style>
 </head>
 <body>
@@ -133,7 +137,7 @@ function drawCal(firstDay, lastDate, date, monthName, year) {
 
   // create basic table structure
   var text = "" // initialize accumulative variable to empty string
-  text += '<CENTER> NZ Time ' + getTime() + '</CENTER>'
+  text += '<CENTER> Time : ' + getTime() + '</CENTER>'
   text += '<CENTER>'
   text += '<TABLE BORDER=' + border + ' CELLSPACING=' + cellspacing + '>' // table settings
   text += '<TH COLSPAN=7 HEIGHT=' + headerHeight + '>' // create table header cell

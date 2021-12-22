@@ -7,15 +7,17 @@ public class FileVO {
 	private String content;
 	private String fileName;
 	private String regDate;
+	private String subjectName;
 	
 	public FileVO() {
 		// TODO Auto-generated constructor stub
 	}
-	public FileVO(String userId, String title, String content, String fileName) {
+	public FileVO(String userId, String title, String content, String fileName, String subjectName) {
 		this.userId=userId;
 		this.title=title;
 		this.content=content;
 		this.fileName=fileName;
+		this.setSubjectName(subjectName);
 	}
 	
 	public FileVO(int boardNo,String userId,String title,String content,String fileName,String regDate) {
@@ -72,6 +74,12 @@ public class FileVO {
 
 	public void setRegDate(String regDate) {
 		this.regDate = regDate;
+	}
+	public String getSubjectName() {
+		return subjectName;
+	}
+	public void setSubjectName(String subjectName) {
+		this.subjectName = subjectName;
 	}
 	
 	

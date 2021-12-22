@@ -77,8 +77,13 @@
 											<p onclick="delete_btn()">탈퇴하기</p>
 											<script>
 												function delete_btn(){
+														msg = "탈퇴하시겠습니까?";
+														if(confirm(msg)!=0){
 														window.location.href='deleteProc.do?userId=${user.userId }';
 														alert("탈퇴되었습니다");
+														}else{
+															//화면에 그대로 있음.
+														}
 													}
 
 											</script>

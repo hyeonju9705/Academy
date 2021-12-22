@@ -72,11 +72,12 @@ public class AcademyController extends HttpServlet {
 		CommentsVO cvo;
 		ANoticeVO avo;
 		FileVO fvo;
+		SyllabusVO svo;
 		List<NoticeVO> nvo2;
 		ArrayList<NoticeVO> nvoList;
 		List<ANoticeVO> avoList;
 		ArrayList<FileVO> fvoList;
-		PrintWriter out = null;
+		List<SyllabusVO> svoList;
 
 		if (cmd.equals("/signupProc.do")) {// 회원가입 후 login.jsp로 이동
 			uvo = new UserVO(request.getParameter("userId"), request.getParameter("userPwd"),
@@ -114,8 +115,9 @@ public class AcademyController extends HttpServlet {
 	         
 	      } else if (cmd.equals("/writeCheck.do")) {
 			String userId = request.getParameter("userId");
-
+			
 			int ok = adao.writeCheck(userId);
+			
 			request.setAttribute("ok", ok);
 
 			RequestDispatcher rd = request.getRequestDispatcher("write.jsp");
@@ -125,15 +127,16 @@ public class AcademyController extends HttpServlet {
 			String userId = request.getParameter("userId");
 			String title = request.getParameter("title");
 			String content = request.getParameter("content");
+			String subjectName= request.getParameter("subjectName");
 
-			nvo = new NoticeVO(userId, title, content);
+			nvo = new NoticeVO(userId, title, content,subjectName);
 			adao.insertNotice(nvo);
 
 			RequestDispatcher rd = request.getRequestDispatcher("viewProc.do");
 			rd.forward(request, response);
 		} else if (cmd.equals("/viewProc.do")) {
-
-			nvoList = adao.selectNoticeAll();
+			String subjectName = request.getParameter("subjectName");
+			nvoList = adao.selectNoticeAll(subjectName);
 			request.setAttribute("nvoList", nvoList);
 
 			RequestDispatcher rd = request.getRequestDispatcher("writeView.jsp");
@@ -176,33 +179,21 @@ public class AcademyController extends HttpServlet {
 			rd.forward(request, response);
 		} else if (cmd.equals("/mainform.do")) { // 메인폼에서 수강과목 클릭시 subject_main.jsp로 이동
 			HttpSession session = request.getSession();
-			//	         String userId = (String) session.getAttribute("userId");
-			String userId = request.getParameter("userId");
-			String subjectName = request.getParameter("subjectName");
-			//	         uvo =adao.checkView(userId, subjectName);
-			nvo2 = adao.selectBoard(subjectName);
-			// C언어 일때
-
-			/*
-			 * if (subjectName.equals("C")) { int ok = adao.checkView(userId, subjectName);
-			 * request.setAttribute("ok", ok); RequestDispatcher rd =
-			 * request.getRequestDispatcher("subject_main.jsp"); rd.forward(request,
-			 * response); } else if (subjectName.equals("JAVA")) { int ok =
-			 * adao.checkView(userId, subjectName); request.setAttribute("ok", ok);
-			 * RequestDispatcher rd = request.getRequestDispatcher("subject_main.jsp");
-			 * rd.forward(request, response); } else if (subjectName.equals("Python")) { int
-			 * ok = adao.checkView(userId, subjectName); request.setAttribute("ok", ok);
-			 * RequestDispatcher rd = request.getRequestDispatcher("subject_main.jsp");
-			 * rd.forward(request, response); } else { out.println(
-			 * "<script>alert('수강중인 과목이 아닙니다.\n -관리자에게 문의해주세요.-'); location.href='history.back()';</script>"
-			 * ); }
-			 */
-
+			uvo = (UserVO) session.getAttribute("user");
+			
+			nvo2 = adao.selectBoardAll2(request.getParameter("subjectName"));
 			request.setAttribute("test", nvo2);
-
-			System.out.println("size " + nvo2.size());
-			RequestDispatcher rd = request.getRequestDispatcher("subject_main.jsp");
-			rd.forward(request, response);
+			
+			//과목 파악해서 맞으면 subject_main.jsp로 이동 아니면 다시 홈화면으로 이동
+			if(request.getParameter("subjectName").equals(uvo.getSubjectName())) { //누른거랑 똑같은거면 걸로 ㄱ
+				RequestDispatcher rd = request.getRequestDispatcher("subject_main.jsp");
+				rd.forward(request, response);
+			}
+			else {			//아니면 고 백 홈~
+				PrintWriter out = response.getWriter();
+				out.println("<script> alert('수강중인 과목이 아닙니다.\\n -관리자에게 문의해주시기 바랍니다.'); location.href='goHome.do';</script>");
+				out.flush();
+			}
 		} else if (cmd.equals("/cWriteProc.do")) {
 			int btn=Integer.parseInt(request.getParameter("btn"));
 			int boardNo=Integer.parseInt(request.getParameter("boardNo"));
@@ -359,10 +350,10 @@ public class AcademyController extends HttpServlet {
 			rd.forward(request, response);
 			//-------------------자료실----------------------
 		}else if(cmd.equals("/dataViewProc.do")) {
-			
-			fvoList = adao.selectFileAll();
+			String subjectName = request.getParameter("subjectName");
+			fvoList = adao.selectFileAll(subjectName);
 			request.setAttribute("fvoList", fvoList);
-			
+			System.out.println("subjectName from dataViewProc 출력되냐????"+subjectName);
 			RequestDispatcher rd = request.getRequestDispatcher("dataView.jsp");
 			rd.forward(request, response);
 		}else if(cmd.equals("/dataWriteCheck.do")) {
@@ -370,7 +361,7 @@ public class AcademyController extends HttpServlet {
 
 			int ok = adao.writeCheck(userId);
 			request.setAttribute("ok", ok);
-
+			
 			RequestDispatcher rd = request.getRequestDispatcher("dataWrite.jsp");
 			rd.forward(request, response);
 		}else if (cmd.equals("/dataWriteProc.do")) {
@@ -388,14 +379,17 @@ public class AcademyController extends HttpServlet {
 				String userId = multi.getParameter("userId");
 				String title = multi.getParameter("title");
 				String content = multi.getParameter("content");
+				String subjectName=multi.getParameter("subjectName");
 				
-				fvo = new FileVO(userId, title, content, fileName);
+				fvo = new FileVO(userId, title, content, fileName, subjectName);
 				adao.insertFile(fvo);
+				request.setAttribute("subjectName", subjectName);
 				
-				RequestDispatcher rd= request.getRequestDispatcher("/dataViewProc.do");
+				RequestDispatcher rd= request.getRequestDispatcher("dataViewProc.do?subjectName="+subjectName);
 				rd.forward(request, response);
 			}catch(Exception e){
 				System.out.print("업로드 오류 발생");
+				e.printStackTrace();
 			}
 		}else if(cmd.equals("/downloadProc.do")) { //file download
 			// ① 파일명 가져오기
@@ -446,6 +440,51 @@ public class AcademyController extends HttpServlet {
 			rd.forward(request, response);
 		}else if(cmd.equals("/dataUpdelProc.do")) {
 			//자료실 수정 삭제 판별
+			String btn=request.getParameter("threebtn");
+			int boardNo=Integer.parseInt(request.getParameter("boardNo"));
+			if(btn.equals("수정")) {
+				
+			}else {
+				//삭제
+				adao.deleteFile(boardNo);
+
+				RequestDispatcher rd = request.getRequestDispatcher("dataViewProc.do");
+				rd.forward(request, response);
+			}
+			
+		}else if (cmd.equals("/syllabus.do")) { // 강의계획서 리스트
+			svoList = adao.selectSyllabusAll(request.getParameter("subjectName"));
+			request.setAttribute("svoList", svoList);
+
+			RequestDispatcher rd = request.getRequestDispatcher("syllabusView.jsp");
+			rd.forward(request, response);
+		} else if (cmd.equals("/syllabusUpdate.do")) { // 수정하는 폼으로 이동
+			svo = adao.selectSyllabus2(Integer.parseInt(request.getParameter("syllabusNo")));
+			
+			request.setAttribute("svo", svo);
+			request.setAttribute("subjectName", request.getParameter("subjectName"));			
+
+			RequestDispatcher rd = request.getRequestDispatcher("syllabusWrite.jsp");
+			rd.forward(request, response);
+		} else if (cmd.equals("/syllabusWrite.do")) { // 정상 로그인이면 업데이트 후에 페이지를 syllabus.do로 이동
+			int syllabusNo = Integer.parseInt(request.getParameter("syllabusNo"));
+			String weekDay = request.getParameter("weekDay");
+			String subjectName = request.getParameter("subjectName");
+			String title = request.getParameter("title");
+			String content = request.getParameter("content");
+
+			svo = new SyllabusVO(syllabusNo, weekDay, title, content, subjectName);
+			// svo = new SyllabusVO("aaa","aaa","aaa","aaa");
+			adao.updateSyllabus(svo); // 업데이트
+			request.setAttribute("subjectName", subjectName);
+			svoList = adao.selectSyllabusAll(subjectName); // syllabus.do에 필요한 리스트
+			request.setAttribute("svoList", svoList);
+
+			// SyllabusVO(String weekDay, String title, String content, String subjectName)
+
+			RequestDispatcher rd = request.getRequestDispatcher("syllabus.do?subjectName=" + subjectName);
+			rd.forward(request, response);
 		}
+
 	}
 }
