@@ -40,29 +40,26 @@
 				<div class="contentBox col-lg-12">
 					<div class="container col-lg-3">
 						<h2 id="site_header" class="site-font-color">수강과목</h2>
-						<form name="input" action="#" method="get">
+						<form name="input" action="getfeedback.html" method="get">
 							<p>${user.subjectName }</p>
 							<ul class="select">
-								<li id="menu_item">강의계획서</li>
+								<li id="menu_item"
+									onclick="location.href='syllabus.do?subjectName=<%=request.getParameter("subjectName")%>'">강의계획서</li>
 							</ul>
 							<ul class="select">
-								<li id="menu_notice">공지사항</li>
+								<li id="menu_notice"
+									onclick="location.href='viewProc.do?userId=<%=session.getAttribute("userId")%>&subjectName=${user.subjectName}'">공지사항</li>
 							</ul>
 							<ul class="select">
-								<li id="menu_qna">질의응답</li>
-							</ul>
-							<ul class="select">
-								<li id="menu_inforoom">자료실</li>
-							</ul>
-							<ul class="select">
-								<li id="menu_report">과제</li>
+								<li id="menu_inforoom"
+									onclick="location.href='dataViewProc.do?userId=<%=session.getAttribute("userId")%>&subjectName=${user.subjectName}'">자료실</li>
 							</ul>
 						</form>
 					</div>
 
 
 					<div class="size710 col-lg-9">
-						<h3 class="title">공지사항</h3>
+						<h3 class="title2">공지사항</h3>
 						<hr class="hrStyle table700">
 						<form method="post"
 							action="<%=request.getContextPath()%>/updelProc.do">
@@ -84,10 +81,7 @@
 								</tr>
 							</table>
 							<p class="hrStyle">
-								${nvo.content}<br>
-								<br>
-								<br>
-								<br>
+								${nvo.content}<br> <br> <br> <br>
 							</p>
 							<c:if test="${nvo.userId == userId}" var="idTest">
 								<input type="submit" name="threebtn" class="gray_btn" value="수정">
@@ -97,14 +91,14 @@
 						<button class="gray_btn_down"
 							onclick="location.href='<%=request.getContextPath()%>/viewProc.do?subjectName=${user.subjectName}'">목록</button>
 						<c:choose>
-						<c:when test="${commentCount ==0 }">
-						<button class="gray_btn_down" onclick="commentToggle()">댓글(0)</button>
-						</c:when>
-						<c:otherwise>
-						<button class="gray_btn_down" onclick="commentToggle()">댓글(${commentCount})</button>
-						</c:otherwise>
+							<c:when test="${commentCount ==0 }">
+								<button class="gray_btn_down" onclick="commentToggle()">댓글(0)</button>
+							</c:when>
+							<c:otherwise>
+								<button class="gray_btn_down" onclick="commentToggle()">댓글(${commentCount})</button>
+							</c:otherwise>
 						</c:choose>
-						
+
 						<form method="post"
 							action="<%=request.getContextPath()%>/cWriteProc.do">
 							<input type="hidden" value="<%=session.getAttribute("userId")%>"
@@ -112,7 +106,7 @@
 								value="${nvo.boardNo}" name="boardNo">
 							<div id="commentBtn" style="display: none">
 								<c:forEach var="cvo" items="${cvoList}">
-								<!-- form안에 cvo.commentsNo가 너무많음.. 그래서 햇갈려서 첫번째껏만 지우고잇는것..-->
+									<!-- form안에 cvo.commentsNo가 너무많음.. 그래서 햇갈려서 첫번째껏만 지우고잇는것..-->
 									<%-- <input type="hidden" value="${cvo.commentsNo }"
 										name="commentsNo"> --%>
 									<hr class="dottHr">
@@ -120,8 +114,7 @@
 										<b style="font-weight: bold;">${cvo.userId }</b><span>(${cvo.regDate})&nbsp;
 											<%-- <input type="button" name="btn" value="삭제" onclick="cDeleteOpen(${cvo.commentsNo})"> --%>
 											<button name="btn" value="${cvo.commentsNo }">삭제</button>
-										</span><br>
-										<br> <span>${cvo.content }</span>
+										</span><br> <br> <span>${cvo.content }</span>
 									</div>
 									<br>
 									<hr class="dottHr">

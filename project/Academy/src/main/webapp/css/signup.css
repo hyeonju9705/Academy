@@ -21,6 +21,19 @@
    animation-iteration-count: infinite;
 }
 
+/* login 링크 */
+a:hover, a:focus { animation-duration: 3s; animation-name: rainbowLink; animation-iteration-count: infinite; } 
+@keyframes rainbowLink {     
+ 0% { color: #ff2a2a; }
+ 15% { color: #ff7a2a; }
+ 30% { color: #ffc52a; }
+ 45% { color: #43ff2a; }
+ 60% { color: #2a89ff; }
+ 75% { color: #202082; }
+ 90% { color: #6b2aff; } 
+ 100% { color: #e82aff; }
+}
+
 /* 하트 */
 .heart {
    position: absolute;
@@ -140,10 +153,18 @@
    padding: 10px 10px;
 }
 
+.join_id:hover {
+    border-bottom: 2px solid #ff3385;
+}
+
 .join_pwd {
    border-bottom: 2px solid #adadad;
    margin: 30px;
    padding: 10px 10px;
+}
+
+.join_pwd:hover {
+    border-bottom: 2px solid #ff3385;
 }
 
 .join_name {
@@ -152,16 +173,28 @@
    padding: 10px 10px;
 }
 
+.join_name:hover {
+    border-bottom: 2px solid #ff3385;
+}
+
 .join_email {
    border-bottom: 2px solid #adadad;
    margin: 30px;
    padding: 10px 10px;
 }
 
+.join_email:hover {
+    border-bottom: 2px solid #ff3385;
+}
+
 .join_phoneno {
    border-bottom: 2px solid #adadad;
    margin: 30px;
    padding: 10px 10px;
+}
+
+.join_phoneno:hover {
+    border-bottom: 2px solid #ff3385;
 }
 
 .id {
@@ -219,7 +252,9 @@
    left: 40%;
    transform: translateX(-50%);
    margin-bottom: 40px;
-   width: 80%;
+  /*  width: 80%; */
+   width: 340px;
+   margin-left:20px;
    height: 40px;
    background: linear-gradient(125deg, #eecda3, #ef629f);
    background-position: left;

@@ -9,9 +9,22 @@
 <link rel="stylesheet" href="css/writeView.css">
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<jsp:include page="header.jsp" />
+<style>
+a:hover, a:focus { animation-duration: 3s; animation-name: rainbowLink; animation-iteration-count: infinite; } 
+@keyframes rainbowLink {     
+ 0% { color: #ff2a2a; }
+ 15% { color: #ff7a2a; }
+ 30% { color: #ffc52a; }
+ 45% { color: #43ff2a; }
+ 60% { color: #2a89ff; }
+ 75% { color: #202082; }
+ 90% { color: #6b2aff; } 
+ 100% { color: #e82aff; }
+}
+</style>
 </head>
 <body>
+<jsp:include page="header.jsp" />
 	<div class="col-lg-12 bg-box">
 		<div class="col-lg-2"></div>
 		<div class="col-lg-8 bg-box3">
@@ -21,24 +34,21 @@
 					<form name="input" action="getfeedback.html" method="get">
 						<p>${user.subjectName }</p>
 						<ul class="select">
-							<li id="menu_item">강의계획서</li>
+                     <li id="menu_item"
+                     onclick="location.href='syllabus.do?subjectName=<%=request.getParameter("subjectName")%>'">강의계획서</li>
+                  		</ul>
+						<ul class="select">
+							<li id="menu_notice"
+								onclick="location.href='viewProc.do?userId=<%=session.getAttribute("userId")%>&subjectName=${user.subjectName}'">공지사항</li>
 						</ul>
 						<ul class="select">
-							<li id="menu_notice">공지사항</li>
-						</ul>
-						<ul class="select">
-							<li id="menu_qna">질의응답</li>
-						</ul>
-						<ul class="select">
-							<li id="menu_inforoom">자료실</li>
-						</ul>
-						<ul class="select">
-							<li id="menu_report">과제</li>
+							<li id="menu_inforoom" onclick="location.href='dataViewProc.do?userId=<%=session.getAttribute("userId")%>&subjectName=${user.subjectName}'">자료실</li>
 						</ul>
 					</form>
 				</div>
 			</div>
 			<div class="col-lg-7">
+			<h3 class="title2">자료실</h3>
 				<div class="subject_container">
 					<table class="tablestyle">
 						<tr class="tablebg">
@@ -67,15 +77,7 @@
 		</div>
 		<div class="col-lg-4"></div>
 	</div>
+	<jsp:include page="footer.jsp"></jsp:include>
 </body>
-<footer>
-	<jsp:include page="footer.jsp" />
-</footer>
-
-<script>
-function write(){
-	
-}
-</script>
 </html>
 

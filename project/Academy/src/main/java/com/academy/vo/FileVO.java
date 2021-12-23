@@ -12,6 +12,18 @@ public class FileVO {
 	public FileVO() {
 		// TODO Auto-generated constructor stub
 	}
+	
+	public FileVO(String title, String content, int boardNo) {
+	      this.title=title;
+	      this.content=content;
+	      this.boardNo = boardNo;
+	   }
+	
+   public FileVO(String title, String content) {
+	   	this.title=title;
+	   	this.content=content;
+   }
+	
 	public FileVO(String userId, String title, String content, String fileName, String subjectName) {
 		this.userId=userId;
 		this.title=title;

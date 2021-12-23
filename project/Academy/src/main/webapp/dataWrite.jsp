@@ -15,7 +15,7 @@
 		%> 
 	<script type="text/javascript">
         alert('학생은 글 작성 권한이 없습니다.');
-        location.href='<%=request.getContextPath()%>/dataViewProc.do';
+        location.href='<%=request.getContextPath()%>/dataViewProc.do?userId=<%=session.getAttribute("userId")%>&subjectName=${user.subjectName}';
     </script>
 <%} %>
 <body>
@@ -26,30 +26,23 @@
 				<div class="container">
 					<h2 id="site_header" class="site-font-color">수강과목</h2>
 					<form name="input" action="getfeedback.html" method="get">
-						<select name="subject">
-							<option value="Java">Java</option>
-							<option value="C">C</option>
-							<option value="Phython">Phthon</option>
-						</select>
+						<p>${user.subjectName }</p>
 						<ul class="select">
-							<li id="menu_item">강의계획서</li>
+                     <li id="menu_item"
+                     onclick="location.href='syllabus.do?subjectName=<%=request.getParameter("subjectName")%>'">강의계획서</li>
+                  		</ul>
+						<ul class="select">
+							<li id="menu_notice"
+								onclick="location.href='viewProc.do?userId=<%=session.getAttribute("userId")%>&subjectName=${user.subjectName}'">공지사항</li>
 						</ul>
 						<ul class="select">
-							<li id="menu_notice"><a href="writeView.jsp">공지사항</a></li>
-						</ul>
-						<ul class="select">
-							<li id="menu_qna">질의응답</li>
-						</ul>
-						<ul class="select">
-							<li id="menu_inforoom">자료실</li>
-						</ul>
-						<ul class="select">
-							<li id="menu_report">과제</li>
+							<li id="menu_inforoom" onclick="location.href='dataViewProc.do?userId=<%=session.getAttribute("userId")%>&subjectName=${user.subjectName}'">자료실</li>
 						</ul>
 					</form>
 				</div>
 			</div>
 			<div class="col-lg-7">
+				<h3 class="title2">자료실</h3>
 				<div class="write-box">
 				
 					<form method="post" action="<%=request.getContextPath()%>/dataWriteProc.do" enctype="multipart/form-data">
@@ -67,8 +60,6 @@
 		</div>
 		<div class="col-lg-4"></div>
 	</div>
+	<jsp:include page="footer.jsp"></jsp:include>
 </body>
-<footer>
-<jsp:include page="footer.jsp"/>
-</footer>
 </html>

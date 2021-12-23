@@ -45,17 +45,17 @@
 									<tr>
 										<!-- <td><input type="hidden" name="userId"></td> -->
 										<td>이름</td>
-										<td><input type="text" name="userName"
+										<td><input type="text" class = "text_1" name="userName"
 											value="${item.userName}"></td>
 
 										<td>비밀번호</td>
-										<td><input type="text" name="userPwd"
+										<td><input type="text"  class = "text_1" name="userPwd"
 											value="${item.userPwd}"></td>
 
 									</tr>
 									<tr>
 										<td>핸드폰</td>
-										<td><input type="text" name="phoneNo"
+										<td><input type="text" class = "text_1" name="phoneNo"
 											value="${item.phoneNo}"></td>
 										<td>과목명</td>
 										<td>${item.subjectName}</td>
@@ -63,7 +63,7 @@
 									</tr>
 									<tr>
 										<td>이메일</td>
-										<td><input type="text" name="email" value="${item.email}"></td>
+										<td><input type="text" class = "text_1" name="email" value="${item.email}"></td>
 										<td>학생/강사 구분</td>
 										<td>${item.division}</td>
 									</tr>
@@ -72,10 +72,9 @@
 										<td colspan="4"><span><br>"이름, 비밀번호, 핸드폰,
 												Email 변경은 시스템 개인정보변경을 이용해서 수정하세요." <br> "학사시스템에서 개인정보
 												변경 후 현 시스템에 적용하기 위해서는 수정버튼을 클릭하세요" <br> <br> </span>
-											<div class="site_button">
-
-												<a href="mypageUpdateProc.do?userId=${item.userId}">수정하기</a>
-											</div></td>
+											<button class="site_button">
+												수정하기
+											</button></td>
 									</tr>
 								</table>
 							</div>
@@ -83,14 +82,10 @@
 					</div>
 				</div>
 			</div>
-			<jsp:include page="footer.jsp" />
 			<div class="col-lg-2"></div>
 		</div>
-
 	</div>
-
-
-
+	<jsp:include page="footer.jsp" />
 </body>
 
 </html>

@@ -10,17 +10,6 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link type="text/css" rel="stylesheet" href="css/syllabusWrite.css">
 </head>
-<%-- <%
-if ((int) request.getAttribute("ok") == 0) {
-%>
-<script type="text/javascript">
-        alert('학생은 글 작성 권한이 없습니다.');
-        location.href='<%=request.getContextPath()%>
-	/syllabus.do';
-</script>
-<%
-}
-%> --%>
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
 	<div class="col-lg-12 bg-box">
@@ -42,20 +31,17 @@ if ((int) request.getAttribute("ok") == 0) {
 								onclick="location.href='syllabus.do?subjectName=<%=request.getParameter("subjectName")%>'">강의계획서</li>
 						</ul>
 						<ul class="select">
-							<li id="menu_notice">공지사항</li>
+							<li id="menu_notice"
+								onclick="location.href='viewProc.do?userId=<%=session.getAttribute("userId")%>&subjectName=${user.subjectName}'">공지사항</li>
 						</ul>
 						<ul class="select">
-							<li id="menu_qna">질의응답</li>
-						</ul>
-						<ul class="select">
-							<li id="menu_inforoom">자료실</li>
-						</ul>
-						<ul class="select">
-							<li id="menu_report">과제</li>
+							<li id="menu_inforoom"
+								onclick="location.href='dataViewProc.do?userId=<%=session.getAttribute("userId")%>&subjectName=${user.subjectName}'">자료실</li>
 						</ul>
 					</div>
 				</div>
 				<div class="col-lg-7">
+					<h3 class="title2">강의계획서</h3>
 					<div class="subject_container">
 						<table class="tablestyle">
 							<tr class="tablebg">
@@ -65,16 +51,16 @@ if ((int) request.getAttribute("ok") == 0) {
 							</tr>
 
 							<tr>
-							<td class="tableP"><input type="text" name="weekDay"
+								<td class="tableP"><input type="text" name="weekDay"
 									value="${svo.weekDay }"
 									style="border: 0 solid black; background-color: transparent !important;"
 									readonly /></td>
-								<td class="tableP"><input type="text" name="title"
-									value="${svo.title }"
-									placeholder="수정할 제목을 입력해주세요." value="${title }" /></td>
-								<td class="tableP"><input type="text" name="content"
-									value="${svo.content }"
-									placeholder="수정할 내용을 입력해주세요." value="${content }" /></td>
+								<td class="tableP"><input type="text" class ="text_1" name="title"
+									value="${svo.title }" placeholder="수정할 제목을 입력해주세요."
+									value="${title }" /></td>
+								<td class="tableP"><input type="text" class = "text_1" name="content"
+									value="${svo.content }" placeholder="수정할 내용을 입력해주세요."
+									value="${content }" /></td>
 							</tr>
 						</table>
 					</div>
@@ -84,7 +70,6 @@ if ((int) request.getAttribute("ok") == 0) {
 				</div>
 			</form>
 		</div>
-
 		<div class="col-lg-4"></div>
 	</div>
 	<jsp:include page="footer.jsp"></jsp:include>

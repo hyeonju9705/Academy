@@ -4,6 +4,16 @@
 	line-height: 40px;
 	color: #ff3385;
 }
+/* 제목 */
+.title2{
+	font-weight: bold;
+    line-height: 40px;
+    font-size: 30px;
+    color: black;
+    width: 800px;
+    border-bottom: 2px solid #dadada;
+    padding-bottom: 5px;
+}
 
 div.container {
 	border: 1px solid black;
@@ -21,7 +31,7 @@ div.container {
 }
 
 .select:hover {
-	background-color: #f76e05;
+	background-color: pink;
 }
 
 li {

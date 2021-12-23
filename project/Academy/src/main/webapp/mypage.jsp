@@ -46,7 +46,7 @@
 									<tr>
 										<td>이름</td>
 										<td>${item.userName}</td>
-										<td>비밀번호</td>
+										<td style="width: 28%;">비밀번호</td>
 										<td>${item.userPwd}</td>
 
 									</tr>
@@ -86,23 +86,7 @@
 														}
 													}
 
-											</script>
-											
-											<%-- <a href='deleteProc.do?userId=${user.userId }'>탈퇴하기</a> --%>
-												<!-- <input type="button" onclick="deleteCheck()" value="탈퇴하기">
-											
-											
-												<script>
-												function deleteCheck(){
-													if(confirm('탈퇴하시겠습니까?') == true);
-													location.href='deleteProc.do?userId=${user.userId }';
-												
-												}else{
-													return false;
-												}
-													</script> -->
-													
-														
+											</script>																		
 											</div></td>
 									</tr>
 								</table>
@@ -110,14 +94,10 @@
 						</form>
 					</div>
 				</div>
-
 			</div>
-			<jsp:include page="footer.jsp" />
 		</div>
 		<div class="col-lg-2"></div>
 	</div>
-
-
+	<jsp:include page="footer.jsp" />
 </body>
-
 </html>

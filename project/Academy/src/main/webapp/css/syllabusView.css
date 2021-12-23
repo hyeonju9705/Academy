@@ -96,6 +96,8 @@ tr:nth-child(even){
 }
 .tableP {
 	padding: 10px;
+	text-align:center;
+	vertical-align: middle;
 }
 
 .table100 {
@@ -153,4 +155,14 @@ tr:nth-child(even){
 
 .bg-box3 {
 	padding-top: 50px;
+}
+
+.title2{
+	font-weight: bold;
+    line-height: 40px;
+    font-size: 30px;
+    color: black;
+    width: 800px;
+    border-bottom: 2px solid #dadada;
+    padding-bottom: 5px;
 }

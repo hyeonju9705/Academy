@@ -40,24 +40,20 @@
 				<div class="contentBox col-lg-12">
 					<div class="container col-lg-3">
 						<h2 id="site_header" class="site-font-color">수강과목</h2>
-						<form name="input" action="#" method="get">
-							<p>${user.subjectName }</p>
-							<ul class="select">
-								<li id="menu_item">강의계획서</li>
-							</ul>
-							<ul class="select">
-								<li id="menu_notice">공지사항</li>
-							</ul>
-							<ul class="select">
-								<li id="menu_qna">질의응답</li>
-							</ul>
-							<ul class="select">
-								<li id="menu_inforoom">자료실</li>
-							</ul>
-							<ul class="select">
-								<li id="menu_report">과제</li>
-							</ul>
-						</form>
+						<form name="input" action="getfeedback.html" method="get">
+						<p>${user.subjectName }</p>
+						<ul class="select">
+                     <li id="menu_item"
+                     onclick="location.href='syllabus.do?subjectName=<%=request.getParameter("subjectName")%>'">강의계획서</li>
+                  		</ul>
+						<ul class="select">
+							<li id="menu_notice"
+								onclick="location.href='viewProc.do?userId=<%=session.getAttribute("userId")%>&subjectName=${user.subjectName}'">공지사항</li>
+						</ul>
+						<ul class="select">
+							<li id="menu_inforoom" onclick="location.href='dataViewProc.do?userId=<%=session.getAttribute("userId")%>&subjectName=${user.subjectName}'">자료실</li>
+						</ul>
+					</form>
 					</div>
 
 

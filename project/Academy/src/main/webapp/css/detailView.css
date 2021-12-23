@@ -1,4 +1,10 @@
-/* 초기화 :브라우저에서 제공하는 것을초기화 할거임 */
+@font-face {
+    font-family: 'OTWelcomeBA';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2110@1.0/OTWelcomeBA.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
 * {
 	margin: 0;
 	padding: 0;
@@ -23,6 +29,16 @@ img {
 	border: 0;
 }
 
+/* 제목 */
+.title2{
+	font-weight: bold;
+    line-height: 40px;
+    font-size: 30px;
+    color: black;
+    width: 800px;
+    border-bottom: 2px solid #dadada;
+    padding-bottom: 5px;
+}
 .total_content {
 	margin-top: 50px;
 	width: 975px;
@@ -30,13 +46,13 @@ img {
 	background-color: white;
 }
 
-/* contentBox 본문 */
+/* contentBox 蹂몃Ц */
 .contentBox {
 	margin-top: 30px;
 	margin-bottom: 100px;
 }
 
-/* leftbar 수강과목 */
+/* leftbar �닔媛뺢낵紐� */
 .site-font-color {
 	font-weight: bold;
 	line-height: 40px;
@@ -61,7 +77,7 @@ div.container {
 	background-color: pink;
 }
 
-/* 글쓰기 뷰 */
+/* 湲��벐湲� 酉� */
 .hrStyle {
 	margin-top: 10px;
 	margin-bottom: 25px;
@@ -127,6 +143,7 @@ table {
 	background: #ebeaeae3;
 	padding: 20px;
 	text-align: center;
+	font-family: 'OTWelcomeBA';
 }
 
 .tablebg2 {
@@ -135,7 +152,7 @@ table {
 	padding-left: 10px;
 }
 
-/* 현주 */
+/* �쁽二� */
 .thumbnail {
 	float: left;
 }

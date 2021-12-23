@@ -18,31 +18,26 @@
 				<div class="container">
 					<h2 id="site_header" class="site-font-color">수강과목</h2>
 					<form name="input" action="getfeedback.html" method="get">
-						<p>${user.subjectName }</p>
+						<p class="welcome-font">${user.subjectName }</p>
 						<ul class="select">
-                     <li id="menu_item"
-                     onclick="location.href='syllabus.do?subjectName=<%=request.getParameter("subjectName")%>'">강의계획서</li>
-                  		</ul>
+							<li id="menu_item"
+								onclick="location.href='syllabus.do?subjectName=<%=request.getParameter("subjectName")%>'">강의계획서</li>
+						</ul>
 						<ul class="select">
 							<li id="menu_notice"
 								onclick="location.href='viewProc.do?userId=<%=session.getAttribute("userId")%>&subjectName=${user.subjectName}'">공지사항</li>
 						</ul>
 						<ul class="select">
-							<li id="menu_qna">질의응답</li>
-						</ul>
-						<ul class="select">
-							<li id="menu_inforoom" onclick="location.href='dataViewProc.do?userId=<%=session.getAttribute("userId")%>&subjectName=${user.subjectName}'">자료실</li>
-						</ul>
-						<ul class="select">
-							<li id="menu_report" onclick="location.href='hwViewProc.do?userId=<%=session.getAttribute("userId")%>'">과제</li>
+							<li id="menu_inforoom"
+								onclick="location.href='dataViewProc.do?userId=<%=session.getAttribute("userId")%>&subjectName=${user.subjectName}'">자료실</li>
 						</ul>
 					</form>
 				</div>
 			</div>
 			<div class="col-lg-7 nameBigbox">
-				<div class="subject_namebox">${user.subjectName }</div>
+				<div class="subject_namebox welcome-font">${user.subjectName }</div>
 				<div class="subject_namebox">
-					<div class="">
+					<div class="welcome-font">
 						<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
 							fill="currentColor" class="bi bi-megaphone-fill"
 							viewbox="0 0 16 16">
@@ -72,25 +67,26 @@
 							<a href="#">더보기 >></a>
 						</p>
 					</ul>
-
 				</div>
 				<div class="subject_namebox">
-                  <p><b>강의 계획서</b> <br>
+               <p>
+                  <b class="welcome-font">강의 계획서</b> <br>
                   <c:forEach var="sylla" items="${sylla }">
-                     <p>[${sylla.weekDay }] ${sylla.title}</p>
+                     <p style="margin-top:2%;">[${sylla.weekDay }] ${sylla.title}</p><br>
                   </c:forEach>
-               </div>
+            </div>
 			</div>
 			<div class="col-lg-3 bg-box4">
 
 				<aside id="main_aside">
-
 					<input id="first" type="radio" name="tab" checked="checked" /> <input
-						id="second" type="radio" name="tab" />
+						id="second" type="radio" name="tab" /> <input id="third"
+						type="radio" name="tab" />
 					<section class="buttons">
 						<label for="first">JAVA</label> <label for="second">C</label> <label
 							for="third">Python</label>
 					</section>
+
 
 					<div class="tab_item">
 						<ul>
@@ -180,15 +176,52 @@
 							</a></li>
 						</ul>
 					</div>
+					<div class="tab_item">
+						<ul>
+							<li class="item"><a
+								href="https://www.youtube.com/playlist?list=PLz2iXe7EqJOOTNTK27a4-WsgZU5NVfguh">
+									<div class="thumbnail">
+										<img src="projectImages/python1.PNG " width="70" height="50">
+									</div>
+									<div class="description">
+										<strong>[소눌코딩]<br>파이썬 기초 강의
+										</strong>
+									</div>
+							</a></li>
+							<li class="item"><a
+								href="https://www.youtube.com/watch?v=yytWGELNeOI">
+									<div class="thumbnail">
+										<img src="projectImages/python2.PNG" width="70" height="50">
+									</div>
+									<div class="description">
+										<strong>[조코딩]<br> 파이썬 무료기초강의 <br></strong>
+									</div>
+							</a></li>
+							<li class="item"><a
+								href="https://www.youtube.com/playlist?list=PLMsa_0kAjjrfYDhzNFLqB8XhSOI0UoIWf">
+									<div class="thumbnail">
+										<img src="projectImages/python3.PNG" width="70" height="50">
+									</div>
+									<div class="description">
+										<strong>[나도코딩]<br> 파이썬 유용한 단편 강의 <br></strong>
+									</div>
+							</a></li>
+							<li class="item"><a
+								href="https://www.youtube.com/playlist?list=PLBXuLgInP-5kr0PclHz1ubNZgESmliuB7">
+									<div class="thumbnail">
+										<img src="projectImages/python4.PNG" width="70" height="50">
+									</div>
+									<div class="description">
+										<strong>[윤인성]<br> 혼자 공부하는 파이썬<br></strong>
+									</div>
+							</a></li>
+						</ul>
+					</div>
 				</aside>
 			</div>
 		</div>
-
 		<div class="col-lg-4"></div>
-
 	</div>
+	<jsp:include page="footer.jsp"></jsp:include>
 </body>
-<footer>
-	<jsp:include page="footer.jsp" />
-</footer>
 </html>

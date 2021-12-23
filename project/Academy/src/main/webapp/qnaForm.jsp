@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,6 +10,19 @@
 	integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
 	crossorigin="anonymous"></script>
 <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> -->
+<style>
+a:hover, a:focus{ animation-duration: 3s; animation-name: rainbowLink; animation-iteration-count: infinite; } 
+@keyframes rainbowLink {     
+ 0% { color: #ff2a2a; }
+ 15% { color: #ff7a2a; }
+ 30% { color: #ffc52a; }
+ 45% { color: #43ff2a; }
+ 60% { color: #2a89ff; }
+ 75% { color: #202082; }
+ 90% { color: #6b2aff; } 
+ 100% { color: #e82aff; }
+}
+</style>
 </head>
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
@@ -24,26 +37,32 @@
 			<div class="left-list" style="width: 562px;">
 				<div class="class-form">
 					<div class="list-title">
-						<span>½ÃÀÛÇÏ±â</span>
+						<span>ì‹œìž‘í•˜ê¸°</span>
 					</div>
 					<div class="red-line site-background-color"></div>
 					<ul>
-						<li><a href="#" class="show" t="1">[°øÅë] ·Î±×ÀÎ ¾ÆÀÌµð, ºñ¹Ð¹øÈ£´Â ¾î¶»°Ô µÇ³ª¿ä?</a>
-							<p id="text1" hidden>&emsp;&emsp;&emsp;¢º È¸¿ø°¡ÀÔ ½Ã ÀÔ·ÂÇÑ ³»¿ëÀ» ±â¾ïÇÏ¼¼¿ä&emsp;
-							<button class="hide" t="1">´äº¯ °¨Ãß±â</button></p>
-						</li>
-						<li><a href="#" class="show" t="2">[°øÅë] È¸¿ø°¡ÀÔÀº ¾î¶»°Ô ÇÏ³ª¿ä?</a>
-							<p id="text2" hidden>&emsp;&emsp;&emsp;¢º Ã¹ ·Î±×ÀÎÈ­¸é¿¡¼­ È¸¿ø°¡ÀÔ Ã¢À» ¼±ÅÃÇÏ¼¼¿ä&emsp;
-							<button class="hide" t="2">´äº¯ °¨Ãß±â</button></p>
-						</li>
-						<li><a href="#" class="show" t="3">[°øÅë] ¼ö°­ÇÒ ¼ö ÀÖ´Â °ú¸ñÀº ¾î¶»°Ô µÇ³ª¿ä?</a>
-							<p id="text3" hidden>&emsp;&emsp;&emsp;¢º Ã¹ ·Î±×ÀÎÈ­¸é¿¡¼­ È¸¿ø°¡ÀÔ Ã¢À» ¼±ÅÃÇÏ¼¼¿ä&emsp;
-							<button class="hide" t="3">´äº¯ °¨Ãß±â</button></p>
-						</li>
-						<li><a href="#" class="show" t="4">[°øÅë] È¸¿øÅ»Åð´Â ¾î¶»°Ô ÇÏ³ª¿ä</a>
-							<p id="text4" hidden>&emsp;&emsp;&emsp;¢º ¸¶ÀÌÆäÀÌÁö¿¡¼­ Å»ÅðÇÏ±â¸¦ ÁøÇàÇÏ¼¼¿ä&emsp;
-							<button class="hide" t="4">´äº¯ °¨Ãß±â</button></p>
-						</li>
+						<li><a href="#" class="show" t="1">[ê³µí†µ] ë¡œê·¸ì¸ ì•„ì´ë””, ë¹„ë°€ë²ˆí˜¸ëŠ”
+								ì–´ë–»ê²Œ ë˜ë‚˜ìš”?</a>
+							<p id="text1" hidden>
+								&emsp;&emsp;&emsp;â–¶ íšŒì›ê°€ìž… ì‹œ ìž…ë ¥í•œ ë‚´ìš©ì„ ê¸°ì–µí•˜ì„¸ìš”&emsp;
+								<button class="hide" t="1">ë‹µë³€ ê°ì¶”ê¸°</button>
+							</p></li>
+						<li><a href="#" class="show" t="2">[ê³µí†µ] íšŒì›ê°€ìž…ì€ ì–´ë–»ê²Œ í•˜ë‚˜ìš”?</a>
+							<p id="text2" hidden>
+								&emsp;&emsp;&emsp;â–¶ ì²« ë¡œê·¸ì¸í™”ë©´ì—ì„œ íšŒì›ê°€ìž… ì°½ì„ ì„ íƒí•˜ì„¸ìš”&emsp;
+								<button class="hide" t="2">ë‹µë³€ ê°ì¶”ê¸°</button>
+							</p></li>
+						<li><a href="#" class="show" t="3">[ê³µí†µ] ìˆ˜ê°•í•  ìˆ˜ ìžˆëŠ” ê³¼ëª©ì€ ì–´ë–»ê²Œ
+								ë˜ë‚˜ìš”?</a>
+							<p id="text3" hidden>
+								&emsp;&emsp;&emsp;â–¶ C JAVA Python 3ê°€ì§€ ê³¼ëª©ì´ ìžˆìŠµë‹ˆë‹¤&emsp;
+								<button class="hide" t="3">ë‹µë³€ ê°ì¶”ê¸°</button>
+							</p></li>
+						<li><a href="#" class="show" t="4">[ê³µí†µ] íšŒì›íƒˆí‡´ëŠ” ì–´ë–»ê²Œ í•˜ë‚˜ìš”</a>
+							<p id="text4" hidden>
+								&emsp;&emsp;&emsp;â–¶ ë§ˆì´íŽ˜ì´ì§€ì—ì„œ íƒˆí‡´í•˜ê¸°ë¥¼ ì§„í–‰í•˜ì„¸ìš”&emsp;
+								<button class="hide" t="4">ë‹µë³€ ê°ì¶”ê¸°</button>
+							</p></li>
 
 					</ul>
 
@@ -52,91 +71,112 @@
 				</div>
 				<div class="class-form">
 					<div class="list-title">
-						<span>Ã»°­ÇÏ±â</span>
+						<span>mainform ê¸°ëŠ¥ì„¤ëª…</span>
 					</div>
 					<div class="red-line site-background-color"></div>
 					<ul>
-						<li><a href="#" class="show" t="5">[°øÅë] È¸¿øÅ»Åð´Â ¾î¶»°Ô ÇÏ³ª¿ä</a>
-							<p id="text5" hidden>&emsp;&emsp;&emsp;¢º ¸¶ÀÌÆäÀÌÁö¿¡¼­ Å»ÅðÇÏ±â¸¦ ÁøÇàÇÏ¼¼¿ä&emsp;
-							<button class="hide" t="5">´äº¯ °¨Ãß±â</button></p>
-						</li>
-						
-						<li><a href="#" class="show" t="6">[°øÅë] È¸¿øÅ»Åð´Â ¾î¶»°Ô ÇÏ³ª¿ä</a>
-							<p id="text6" hidden>&emsp;&emsp;&emsp;¢º ¸¶ÀÌÆäÀÌÁö¿¡¼­ Å»ÅðÇÏ±â¸¦ ÁøÇàÇÏ¼¼¿ä&emsp;
-							<button class="hide" t="6">´äº¯ °¨Ãß±â</button></p>
-						</li>
-						
-						<li><a href="#" class="show" t="7">[°øÅë] È¸¿øÅ»Åð´Â ¾î¶»°Ô ÇÏ³ª¿ä</a>
-							<p id="text7" hidden>&emsp;&emsp;&emsp;¢º ¸¶ÀÌÆäÀÌÁö¿¡¼­ Å»ÅðÇÏ±â¸¦ ÁøÇàÇÏ¼¼¿ä&emsp;
-							<button class="hide" t="7">´äº¯ °¨Ãß±â</button></p>
-						</li>
-						
-						<li><a href="#" class="show" t="8">[°øÅë] È¸¿øÅ»Åð´Â ¾î¶»°Ô ÇÏ³ª¿ä</a>
-							<p id="text8" hidden>&emsp;&emsp;&emsp;¢º ¸¶ÀÌÆäÀÌÁö¿¡¼­ Å»ÅðÇÏ±â¸¦ ÁøÇàÇÏ¼¼¿ä&emsp;
-							<button class="hide" t="8">´äº¯ °¨Ãß±â</button></p>
-						</li>
+						<li><a href="#" class="show" t="5">[ê³µí†µ] ACADEMY ê³µì§€ì‚¬í•­ </a>
+							<p id="text5" hidden>
+								&emsp;&emsp;&emsp;â–¶ ACADEMY ì „ì²´ ê³µì§€ì‚¬í•­ìž…ë‹ˆë‹¤.<br>&emsp;&emsp;&emsp;(ê°•ì‚¬ë‹˜ë§Œ
+								ë“±ë¡ ê°€ëŠ¥)&emsp;
+								<button class="hide" t="5">ë‹µë³€ ê°ì¶”ê¸°</button>
+							</p></li>
+
+						<li><a href="#" class="show" t="6">[ê³µí†µ] ìˆ˜ê°•ê³¼ëª© </a>
+							<p id="text6" hidden>
+								&emsp;&emsp;&emsp;â–¶ íšŒì›ê°€ìž…ì‹œ ë³¸ì¸ì´ ì„ íƒí•œ ê³¼ëª©ë§Œ ë“¤ì–´ê°€ì§‘ë‹ˆë‹¤&emsp;
+								<button class="hide" t="6">ë‹µë³€ ê°ì¶”ê¸°</button>
+							</p></li>
+
+						<li><a href="#" class="show" t="7">[ê³µí†µ] ê³¼ëª© ê³µì§€ì‚¬í•­ ?</a>
+							<p id="text7" hidden>
+								&emsp;&emsp;&emsp;â–¶ íšŒì›ê°€ìž…ì‹œ ë³¸ì¸ì´ ì„ íƒí•œ ê³¼ëª©ë§Œ ë“¤ì–´ê°€ì§‘ë‹ˆë‹¤<br>&emsp;&emsp;&emsp;&emsp;(ê°•ì‚¬ë‹˜ë§Œ
+								ë“±ë¡ ê°€ëŠ¥)&emsp;
+								<button class="hide" t="7">ë‹µë³€ ê°ì¶”ê¸°</button>
+							</p></li>
+
+						<li><a href="#" class="show" t="8">[ê³µí†µ] Quick Menu ?</a>
+							<p id="text8" hidden>
+								&emsp;&emsp;&emsp;â–¶ ìˆ˜ê°•ê³¼ëª©, ë§ˆì´íŽ˜ì´ì§€, FQAë¡œ ì´ë™ ê°€ëŠ¥í•©ë‹ˆë‹¤&emsp;
+								<button class="hide" t="8">ë‹µë³€ ê°ì¶”ê¸°</button>
+							</p></li>
 					</ul>
 
 
 				</div>
 				<div class="class-form">
 					<div class="list-title">
-						<span>½ÃÀÛÇÏ±â</span>
+						<span>subject_main ê¸°ëŠ¥ì„¤ëª…</span>
 					</div>
 					<div class="red-line site-background-color"></div>
 					<ul>
-						<li><a href="#" class="show" t="9">[°øÅë] È¸¿øÅ»Åð´Â ¾î¶»°Ô ÇÏ³ª¿ä</a>
-							<p id="text9" hidden>&emsp;&emsp;&emsp;¢º ¸¶ÀÌÆäÀÌÁö¿¡¼­ Å»ÅðÇÏ±â¸¦ ÁøÇàÇÏ¼¼¿ä&emsp;
-							<button class="hide" t="9">´äº¯ °¨Ãß±â</button></p>
-						</li>
-						
-						<li><a href="#" class="show" t="10">[°øÅë] È¸¿øÅ»Åð´Â ¾î¶»°Ô ÇÏ³ª¿ä</a>
-							<p id="text10" hidden>&emsp;&emsp;&emsp;¢º ¸¶ÀÌÆäÀÌÁö¿¡¼­ Å»ÅðÇÏ±â¸¦ ÁøÇàÇÏ¼¼¿ä&emsp;
-							<button class="hide" t="10">´äº¯ °¨Ãß±â</button></p>
-						</li>
-						
-						<li><a href="#" class="show" t="11">[°øÅë] È¸¿øÅ»Åð´Â ¾î¶»°Ô ÇÏ³ª¿ä</a>
-							<p id="text11" hidden>&emsp;&emsp;&emsp;¢º ¸¶ÀÌÆäÀÌÁö¿¡¼­ Å»ÅðÇÏ±â¸¦ ÁøÇàÇÏ¼¼¿ä&emsp;
-							<button class="hide" t="11">´äº¯ °¨Ãß±â</button></p>
-						</li>
-						
-						<li><a href="#" class="show" t="12">[°øÅë] È¸¿øÅ»Åð´Â ¾î¶»°Ô ÇÏ³ª¿ä</a>
-							<p id="text12" hidden>&emsp;&emsp;&emsp;¢º ¸¶ÀÌÆäÀÌÁö¿¡¼­ Å»ÅðÇÏ±â¸¦ ÁøÇàÇÏ¼¼¿ä&emsp;
-							<button class="hide" t="12">´äº¯ °¨Ãß±â</button></p>
-						</li>
+						<li><a href="#" class="show" t="9">[ê³µí†µ] ì˜¤ë¥¸ìª½ ë°”</a>
+							<p id="text9" hidden>
+								&emsp;&emsp;&emsp;â–¶ ê³¼ëª©ë³„ë¡œ ì„ íƒì‹œ ê´€ë ¨ë§í¬ë¡œ ë„˜ì–´ê°&emsp;
+								<button class="hide" t="9">ë‹µë³€ ê°ì¶”ê¸°</button>
+							</p></li>
+
+						<li><a href="#" class="show" t="10">[ê³µí†µ] ê°•ì˜ê³„íšì„œ</a>
+							<p id="text10" hidden>
+								&emsp;&emsp;&emsp;â–¶ ìˆ˜ì • ê°€ëŠ¥&emsp;
+								<button class="hide" t="10">ë‹µë³€ ê°ì¶”ê¸°</button>
+							</p></li>
+
+						<li><a href="#" class="show" t="11">[ê³µí†µ] ê³µì§€ì‚¬í•­</a>
+							<p id="text11" hidden>
+								&emsp;&emsp;&emsp;â–¶ ê¸€ì“°ê¸°, ìˆ˜ì •, ëŒ“ê¸€ìž…ë ¥ ë° ìˆ˜ì • ê°€ëŠ¥&emsp;
+								<button class="hide" t="11">ë‹µë³€ ê°ì¶”ê¸°</button>
+							</p></li>
+
+						<li><a href="#" class="show" t="12">[ê³µí†µ] ìžë£Œì‹¤</a>
+							<p id="text12" hidden>
+								&emsp;&emsp;&emsp;â–¶ ê¸€ì“°ê¸°(íŒŒì¼ ì²¨ë¶€ê°€ëŠ¥), ìˆ˜ì •, ì‚­ì œ ê°€ëŠ¥ &emsp;
+								<button class="hide" t="12">ë‹µë³€ ê°ì¶”ê¸°</button>
+							</p></li>
 					</ul>
 				</div>
 			</div>
 			<div class="right-list">
 				<div class="step-box">
 					<div class="list-title">
-						<span>ÀÎ±â</span>
+						<span>ê¸°ëŠ¥ì„¤ëª…</span>
 					</div>
 					<div class="red-line site-background-color"></div>
 					<ul>
-						<li><a href="#" class="show" t="13">[ÇÐ»ý] ¼ö¾÷Àº ¾î¶»°Ô ÁøÇàµÇ³ª¿ä?<br></a>
-							<p id="text13" hidden><br>&emsp;&emsp;&emsp;¢º °­»ç´ÔÀÌ ¸»ÇØÁìµÔ~~~<br><br>&emsp;&emsp;&emsp;
-							<button class="hide" t="13">´äº¯ °¨Ãß±â</button></p>
-						</li>
-						<li><a href="#" class="show" t="14">[°­»ç] °­»çµµ Ã»°­ÇÒ ¼ö ÀÖ³ª¿ä?</a>
-							<p id="text14" hidden><br>&emsp;&emsp;&emsp;¢º °­»ç´ÔÀÌ ¸»ÇØÁìµÔ~~~~<br><br>&emsp;&emsp;&emsp;
-							<button class="hide" t="14">´äº¯ °¨Ãß±â</button></p>
-						</li>
-						<li><a href="#" class="show" t="15">[°­»ç] °­»çµµ Ã»°­ÇÒ ¼ö ÀÖ³ª¿ä?</a>
-							<p id="text15" hidden><br>&emsp;&emsp;&emsp;¢º °­»ç´ÔÀÌ ¸»ÇØÁìµÔ~~~~<br><br>&emsp;&emsp;&emsp;
-							<button class="hide" t="15">´äº¯ °¨Ãß±â</button></p>
-						</li>
-				
+						<li><a href="#" class="show" t="13">[ê³µí†µ] ë§ˆì´íŽ˜ì´ì§€?<br></a>
+							<p id="text13" hidden>
+								<br>&emsp;&emsp;â–¶ userì •ë³´ ì¡°íšŒ, ìˆ˜ì •, ì‚­ì œ ê°€ëŠ¥<br>
+								<br>&emsp;&emsp;&emsp;
+								<button class="hide" t="13">ë‹µë³€ ê°ì¶”ê¸°</button>
+							</p></li>
+						<li><a href="#" class="show" t="14">[ê³µí†µ] FAQ ?</a>
+							<p id="text14" hidden>
+								<br>&emsp;&emsp;&emsp;â–¶ í”„ë¡œì íŠ¸ì— ì‚¬ìš©ëœ ê¸°ëŠ¥ ì„¤ëª…<br>
+								<br>&emsp;&emsp;&emsp;
+								<button class="hide" t="14">ë‹µë³€ ê°ì¶”ê¸°</button>
+							</p></li>
+						<li><a href="#" class="show" t="15">[ê³µí†µ] í—¤ë” ?</a>
+							<p id="text15" hidden>
+								<br>&emsp;&emsp;&emsp;â–¶ home, mypageë¡œ ì´ë™ê°€ëŠ¥<br>
+								<br>&emsp;&emsp;&emsp;
+								<button class="hide" t="15">ë‹µë³€ ê°ì¶”ê¸°</button>
+							</p></li>
+
 					</ul>
 				</div>
 				<div class="step-box">
 					<div class="list-title">
-						<span>ÀÎ±â</span>
+						<span>ëª…ì–¸</span>
 					</div>
 					<div class="red-line site-background-color"></div>
 					<ul>
-						<li>[ÇÐ»ý] ¼ö¾÷Àº ¾î¶»°Ô ÁøÇàµÇ³ª¿ä?</li>
-						<li>[°­»ç] È£¿¨È£¿¨</li>
+						<li>â—ˆ ì½”ë”©ì„ ëª»ì§°ìœ¼ë©´ <br>
+						<br> &emsp;ìž ë„ ìžì§€ë§ˆë¼.
+						</li>
+						<li>â—ˆ ë¯¸ëž˜ë¥¼ ì‹ ë¢°í•˜ì§€ ë§ˆë¼,<br>
+						<br> &emsp; ì£½ì€ ê³¼ê±°ëŠ” ë¬»ì–´ë²„ë ¤ë¼. <br>
+						<br> &emsp;ê·¸ë¦¬ê³  ì‚´ì•„ìžˆëŠ” í˜„ìž¬ì— í–‰ë™í•˜ë¼
+						</li>
 						<li>
 					</ul>
 				</div>
@@ -153,6 +193,6 @@
 			});
 		});
 	</script>
-
+	<jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>

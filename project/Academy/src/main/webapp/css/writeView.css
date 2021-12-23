@@ -4,12 +4,18 @@
 	line-height: 40px;
 	color: #ff3385;
 }
-.title{
+
+/* 제목 */
+.title2{
 	font-weight: bold;
     line-height: 40px;
     font-size: 30px;
     color: black;
+    width: 800px;
+    border-bottom: 2px solid #dadada;
+    padding-bottom: 5px;
 }
+
 div.container {
 	border: 1px solid black;
 	text-align: center;
@@ -119,7 +125,7 @@ tr:nth-child(even){
 	color: black;
 	font-weight: 700;
 	float: right;
-	margin: 10px -150px 5px 15px;
+	margin: 56px -150px 5px 15px;
 }
 
 .bg-box2 {

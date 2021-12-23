@@ -290,7 +290,6 @@ public class AcademyDAO {
 			pstmt = getConnection().prepareStatement(sql);
 			pstmt.setString(1, subjectName);
 			rs = pstmt.executeQuery();
-			System.out.println("DAO : " + subjectName);
 			while (rs.next()) {
 				NoticeVO nvo2 = new NoticeVO(rs.getString(1), rs.getString(2));
 				bvo.add(nvo2);
@@ -369,7 +368,7 @@ public class AcademyDAO {
 		int count = 0;
 		conn = getConnection();
 		try {
-			pstmt = conn.prepareStatement("update User set userName=?, userPwd=?, phoneNo=?, email=? where userId=?;");
+			pstmt = conn.prepareStatement("update User set userName=?, userPwd=?, phoneNo=?, email=? where userId=?");
 			pstmt.setString(1, vo.getUserName());
 			pstmt.setString(2, vo.getUserPwd());
 			pstmt.setString(3, vo.getPhoneNo());
@@ -744,6 +743,24 @@ public class AcademyDAO {
  		}
  		return fvo;
  	}
+     
+     public int dataUpdate(FileVO vo) {   //자료실 수정
+         int count=0;
+         conn = getConnection();
+         try {
+           pstmt = conn.prepareStatement("update datalab set title=?, content=? where boardNo=?");
+           pstmt.setString(1, vo.getTitle());
+           pstmt.setString(2, vo.getContent());
+           pstmt.setInt(3, vo.getBoardNo());
+           
+           count = pstmt.executeUpdate();         
+           close(conn, pstmt);
+        } catch (SQLException e) {
+           e.printStackTrace();
+        }
+         
+         return count;
+      }
      
   // 강의계획서
  	public List<SyllabusVO> selectSyllabus(String subjectName) { // subject_main.jsp에서 강의계획서 띄우기

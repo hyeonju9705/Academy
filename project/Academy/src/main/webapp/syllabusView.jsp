@@ -25,29 +25,25 @@
 								onclick="location.href='syllabus.do?subjectName=<%=request.getParameter("subjectName")%>'">강의계획서</li>
 						</ul>
 						<ul class="select">
-							<li id="menu_notice">공지사항</li>
+							<li id="menu_notice"
+								onclick="location.href='viewProc.do?userId=<%=session.getAttribute("userId")%>&subjectName=${user.subjectName}'">공지사항</li>
 						</ul>
 						<ul class="select">
-							<li id="menu_qna">질의응답</li>
-						</ul>
-						<ul class="select">
-							<li id="menu_inforoom">자료실</li>
-						</ul>
-						<ul class="select">
-							<li id="menu_report">과제</li>
+							<li id="menu_inforoom"
+								onclick="location.href='dataViewProc.do?userId=<%=session.getAttribute("userId")%>&subjectName=${user.subjectName}'">자료실</li>
 						</ul>
 					</form>
 				</div>
 			</div>
 
 			<div class="col-lg-7">
+				<h3 class="title2">강의계획서</h3>
 				<div class="subject_container">
 					<table class="tablestyle">
 						<tr class="tablebg">
 							<th class="tableP">주차</th>
 							<th class="tableP">요약</th>
 							<th class="tableP">설명</th>
-							<th class="tableP">수정</th>
 						</tr>
 
 						<%-- ?userId=<%=session.getAttribute("userId")%>& subjectName=<%=request.getParameter("subjectName")%> --%>
@@ -66,32 +62,19 @@
 									<td class="tableP">${svo.content}<input type="hidden"
 										name="content" value="${svo.content}"
 										style="border: 0 solid black; background-color: transparent !important;"></td>
-									<td class="tableP">
-										<!-- <input type="submit" name="btn" value="수정"> -->
-										<button value="${svo.syllabusNo }" name="syllabusNo">수정</button>
-									</td>
+									<td><input type="submit" class="gray_btn"
+										name="syllabusNo"
+										<%-- value="${svo.syllabusNo }" --%> value="수정" /></td>
 								</tr>
 							</form>
 						</c:forEach>
-
 					</table>
-
 				</div>
 			</div>
 		</div>
-
 		<div class="col-lg-4"></div>
 	</div>
-
-</body>
-<footer>
 	<jsp:include page="footer.jsp" />
-</footer>
-
-<script>
-	function write() {
-
-	}
-</script>
+</body>
 </html>
 

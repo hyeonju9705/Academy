@@ -7,17 +7,9 @@
 <title>Insert title here</title>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<link rel="stylesheet" href="css/write.css" />
+<link rel="stylesheet" href="css/updateForm.css">
 <jsp:include page="header.jsp" />
 </head>
-<%
-	if((int)request.getAttribute("ok")==0){
-		%> 
-	<script type="text/javascript">
-        alert('학생은 글 작성 권한이 없습니다.');
-        location.href='<%=request.getContextPath()%>/AviewProc.do';
-    </script>
-<%} %>
 <body>
 	<div class="col-lg-12 bg-box">
 		<div class="col-lg-2"></div>
@@ -31,15 +23,22 @@
 						</form>
 					</div>
 			</div>
+
 			<div class="col-lg-7">
+				<h3 class="title2">ACADEMY 공지사항</h3>
 				<div class="write-box">
-				
-					<form method="post" action="<%=request.getContextPath()%>/AwriteProc.do">
-						<input type="hidden" value="<%=session.getAttribute("userId")%>" name="userId">
-						<input type="text" class="orange_text" placeholder="제목" name="title"> <br>
-						<textarea class="orange_area" placeholder="내용" name="content"></textarea>
+
+					<form method="post"
+						action="<%=request.getContextPath()%>/dataUpdateProc.do">
+						<input type="hidden" value="<%=session.getAttribute("userId")%>"
+							name="userId"> <input type="hidden"
+							value="${fvo.boardNo }" name="boardNo"> <input
+							type="hidden" value="${user.subjectName}" name="subjectName">
+						<input type="text" class="orange_text" placeholder="제목"
+							name="title" value="${fvo.title}"> <br>
+						<textarea class="orange_area" placeholder="내용" name="content">${fvo.content}</textarea>
 						<input type="submit" value="저장" class="orange_btn"> <input
-						type="reset" value="취소" class="gray_btn">
+							type="reset" value="취소" class="gray_btn">
 					</form>
 				</div>
 			</div>
@@ -47,6 +46,6 @@
 		</div>
 		<div class="col-lg-4"></div>
 	</div>
-	<jsp:include page="footer.jsp"></jsp:include>
+	<jsp:include page="footer.jsp" />
 </body>
 </html>

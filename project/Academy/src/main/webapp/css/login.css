@@ -8,9 +8,10 @@
 }
 
 .logo {
+	width: 256px;
   margin: -129px;
-  margin-top: -76px;
-      margin-left: -40%;
+  margin-top: -13px;
+  margin-left: -40%;
 }
 
 
@@ -26,6 +27,18 @@
   animation-name: backdiv;
   animation-duration: 15s; 
   animation-iteration-count: infinite;
+}
+/* signup 링크 */
+a:hover, a:focus { animation-duration: 3s; animation-name: rainbowLink; animation-iteration-count: infinite; } 
+@keyframes rainbowLink {     
+ 0% { color: #ff2a2a; }
+ 15% { color: #ff7a2a; }
+ 30% { color: #ffc52a; }
+ 45% { color: #43ff2a; }
+ 60% { color: #2a89ff; }
+ 75% { color: #202082; }
+ 90% { color: #6b2aff; } 
+ 100% { color: #e82aff; }
 }
 
 /* 하트배경 */
@@ -138,14 +151,22 @@
 .idForm {
   border-bottom: 2px solid #adadad;
   margin: 30px;
-  margin-top: 150px;
+  margin-top: 108px;
   padding: 10px 10px;
+}
+
+.idForm:hover {
+    border-bottom: 2px solid #ff3385;
 }
 
 .passForm {
   border-bottom: 2px solid #adadad;
   margin: 30px;
   padding: 10px 10px;
+}
+
+.passForm:hover {
+    border-bottom: 2px solid #ff3385;
 }
 
 .id {

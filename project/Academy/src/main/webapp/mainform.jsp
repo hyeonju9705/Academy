@@ -11,57 +11,57 @@
 <title>Document</title>
 <link href="css/mainform.css" rel="stylesheet" type="text/css">
 <style>
-.cal-box{
-border : 2px pink;
-border-style: dashed;
-padding: 30px;
+.cal-box {
+	border: 2px pink;
+	border-style: dashed;
+	padding: 30px;
 }
 </style>
 </head>
 <script type="text/javascript">
 <%String userId = session.getId();
-if (request.getHeader("referer").equals("http://localhost:9000/Academy/login.jsp")) {
-   int ok = (Integer) request.getAttribute("ok");
-   if (ok == 1) { //아이디 비번 일치, 회원이면서 비번 일치
-      session.setAttribute("user", request.getAttribute("user"));
-      session.setAttribute("userId", request.getParameter("userId"));%>
+if (request.getHeader("referer").equals("http://192.168.0.16:9000/Academy/login.jsp")) {
+	int ok = (Integer) request.getAttribute("ok");
+	if (ok == 1) { //아이디 비번 일치, 회원이면서 비번 일치
+		session.setAttribute("user", request.getAttribute("user"));
+		session.setAttribute("userId", request.getParameter("userId"));%>
+		debugger;
        alert('환영합니다. 아카데미 홈페이지에 방문해주셔서 감사합니다.');
     //   
  
-<%
-    } else if (ok == 2) {%> //회원이면서 비번 불일치
+<%} else if (ok == 2) {%> //회원이면서 비번 불일치
 alert('비밀번호가 틀렸습니다. 확인 후 로그인 바랍니다.');
 
     location.href='<%=request.getContextPath()%>/login.jsp'; 
-<%
-} else {
-%>
+<%} else {%>
       alert('아이디가 틀렸습니다. 확인 후 로그인 바랍니다.'); //비회원임
-       location.href='<%=request.getContextPath()%>/login.jsp';
+       location.href='<%=request.getContextPath()%>
+	/login.jsp';
 <%}
-}%>   
+}%>
+	
 </script>
 
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
 	<%-- OKOKOK : <c:out value="${ok}"/>
 	<c:if/>+ --%>
-	<div class="total_content">
+	<div class="total_content" >
 		<!-- 컨텐츠 왼쪽 -->
 		<div class="content">
-		
-		<div class="cal-box">
-			<jsp:include page="calendar.jsp"/>
-		</div>
+
+			<div class="cal-box">
+				<jsp:include page="calendar.jsp" />
+			</div>
 			<!-- 전체 공지사항 -->
 			<div style="width: 600px;" class="first-box">
 				<div class="subject">
 					<div class="bar site-background-color"></div>
-					<span>ACADEMY 공지사항</span>
+					<span class="welcome-font">ACADEMY 공지사항</span>
 					<div class="whole" style="float: right; margin-top: 8px;">
 						<div>
-							<a href='AviewProc.do?userId=${userId}'>
-								<img src="projectImages/btn_all.gif" alt="공지사항">
+							<a href='AviewProc.do?userId=${userId}'> <img
+								src="projectImages/btn_all.gif" alt="공지사항">
 							</a>
 						</div>
 					</div>
@@ -70,7 +70,8 @@ alert('비밀번호가 틀렸습니다. 확인 후 로그인 바랍니다.');
 					<c:forEach var="Aitem" items="${Aadao }">
 						<li
 							style="padding-left: 10px; background: url('projectImages/ul_dot.png') no-repeat 0 49%">
-							<a href='AdetailViewProc.do?boardNo=${Aitem.boardNo }'>[전체] ${Aitem.title} </a> 
+							<a href='AdetailViewProc.do?boardNo=${Aitem.boardNo }'>[전체]
+								${Aitem.title} </a>
 						</li>
 					</c:forEach>
 					<li style="border-bottom: 1px dotted #E6E6E6;"></li>
@@ -81,7 +82,7 @@ alert('비밀번호가 틀렸습니다. 확인 후 로그인 바랍니다.');
 			<div style="width: 600px;" class="first-box">
 				<div class="subject">
 					<div class="bar site-background-color"></div>
-					<span>수강과목</span>
+					<span class="welcome-font">수강과목</span>
 				</div>
 				<ol>
 					<li class="term_info" style="color: #ff3385;">정규 수업</li>
@@ -111,10 +112,11 @@ alert('비밀번호가 틀렸습니다. 확인 후 로그인 바랍니다.');
 			<div style="width: 600px;" class="first-box">
 				<div class="subject">
 					<div class="bar site-background-color"></div>
-					<span>과목 공지사항</span>
+					<span class="welcome-font">과목 공지사항</span>
 					<div class="whole" style="float: right; margin-top: 8px;">
 						<%-- <a href='viewProc.do?userId=<%=request.getParameter("userId")%>'> --%>
-						<a href='viewProc.do?userId=${userId}'>
+						<a
+							href='viewProc.do?userId=${userId}&subjectName=${user.subjectName}'>
 							<img src="projectImages/btn_all.gif" alt="공지사항">
 						</a>
 					</div>
@@ -123,56 +125,63 @@ alert('비밀번호가 틀렸습니다. 확인 후 로그인 바랍니다.');
 					<c:forEach var="item" items="${adao }">
 						<li
 							style="padding-left: 10px; background: url('projectImages/ul_dot.png') no-repeat 0 49%">
-							[${item.subjectName }] ${item.title}			
+							<a
+							href="detailViewProc.do?boardNo=${item.boardNo }&subjectName=${item.subjectName}">[${item.subjectName }]
+								${item.title}</a>
 						</li>
 					</c:forEach>
 				</ol>
 			</div>
-<jsp:include page="footer.jsp"></jsp:include>
+
 		</div>
 
 
 		<div class="right_aside">
 			<!-- 콘텐트 오른쪽 -->
 			<fieldset class="icon-box">
-				<div class="title-01" style="margin-left: 19%;">
-					<span class="site-font-color" style="color: #ff3385">Quick
-						Menu</span>
-					<div class="icon-subject"></div>
-				</div>
+            <div class="title-01" style="margin-left: 19%;">
+               <span class="site-font-color" style="color: #ff3385">Quick
+                  Menu</span>
+               <div class="icon-subject"></div>
+            </div>
+            
+            <div class="icon-subject">
+               <img src="projectImages/subject.png">
+               <div class="iconn-my">
+                  <a href="mainform.do?subjectName=${user.subjectName }">수강과목</a>
+               </div>
+            </div>
+
+            <div class="icon-bar">
+               <img src="projectImages/iconbar.png">
+            </div>
+
+            <div class="icon-my">
+               <img src="projectImages/my.png">
+               <div class="iconn-my">
+                  <a href="mypage.do?userId=${userId}">마이페이지</a>
+               </div>
+            </div>
 
 
-				<div class="icon-subject" style="margin-left: 8%;">
-					<img src="projectImages/subject.png">
-					<div class="icon-sub">수강과목</div>
-				</div>
+            <div class="icon-bar">
+               <img src="projectImages/iconbar.png">
+            </div>
 
-				<div class="icon-bar">
-					<img src="projectImages/iconbar.png">
-				</div>
-
-
-				<div class="icon-my">
-					<img src="projectImages/my.png">
-					<div class="iconn-my">
-						<a href="mypage.do?userId=${userId}">마이페이지</a>
-					</div>
-				</div>
-
-
-				<div class="icon-bar">
-					<img src="projectImages/iconbar.png">
-				</div>
-
-				<div class="icon-faq">
+            <div class="icon-faq">
                <a href="qnaForm.jsp"><img src="projectImages/faq.png"></a>
                <div class="iconn-my">
                   <a href="qnaForm.jsp">FAQ</a>
                </div>
-            	</div>
+            </div>
 
 
-			</fieldset>
+         </fieldset>
+
+			<div class="line"></div>
+			<div class="line2"></div>
+			<!-- <div class="line"></div>
+			<div class="line2"></div> -->
 
 			<!-- 콘텐트 오른쪽 아래 -->
 			<aside id="main_aside">
@@ -180,9 +189,8 @@ alert('비밀번호가 틀렸습니다. 확인 후 로그인 바랍니다.');
 					id="second" type="radio" name="tab" /> <input id="third"
 					type="radio" name="tab" />
 				<section class="buttons">
-					<label for="first" style="background: pink;">JAVA</label> <label
-						for="second" style="background: pink;">C</label> <label
-						for="third" style="background: pink;">Python</label>
+					<label for="first">JAVA</label> <label for="second">C</label> <label
+						for="third">Python</label>
 				</section>
 				<div class="tab_item">
 					<ul>
@@ -316,8 +324,62 @@ alert('비밀번호가 틀렸습니다. 확인 후 로그인 바랍니다.');
 			</aside>
 		</div>
 	</div>
-	
 </body>
+<footer class="footer-distributed footer">
 
+         <div class="footer-left">
 
+            <h3>Y<span>ACADEMY</span></h3>
+
+            <p class="footer-links">
+               <a href="#">Home</a>
+               ·
+               <a href="#">Blog</a>
+               ·
+               <a href="#">Pricing</a>
+               ·
+               <a href="#">About</a>
+               ·
+               <a href="#">Faq</a>
+               ·
+               <a href="#">Contact</a>
+            </p>
+
+            <p class="footer-company-name">Acadmy hyeonju Jeong, Heesoo Kwon, Junho Park © 2021</p>
+
+            <!-- <div class="footer-icons">
+
+               <a href="#"><i class="fa fa-facebook"></i></a>
+               <a href="#"><i class="fa fa-twitter"></i></a>
+               <a href="#"><i class="fa fa-linkedin"></i></a>
+               <a href="#"><i class="fa fa-github"></i></a>
+
+            </div> -->
+
+         </div>
+
+         <div class="footer-right">
+
+            <p>Contact Us</p>
+
+            <form action="#" method="post">
+
+               <a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-facebook" viewBox="0 0 16 16">
+  <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"/>
+</svg></a>
+               <a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-twitter" viewBox="0 0 16 16">
+  <path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z"/>
+</svg></i></a>
+               <a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-github" viewBox="0 0 16 16">
+  <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+</svg></a>
+               <a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-linkedin" viewBox="0 0 16 16">
+  <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z"/>
+</svg></a>
+
+            </form>
+
+         </div>
+
+      </footer>
 </html>

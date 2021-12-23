@@ -78,6 +78,7 @@ public class AcademyController extends HttpServlet {
 		List<ANoticeVO> avoList;
 		ArrayList<FileVO> fvoList;
 		List<SyllabusVO> svoList;
+		PrintWriter out = null;
 
 		if (cmd.equals("/signupProc.do")) {// 회원가입 후 login.jsp로 이동
 			uvo = new UserVO(request.getParameter("userId"), request.getParameter("userPwd"),
@@ -89,14 +90,12 @@ public class AcademyController extends HttpServlet {
 		} else if (cmd.equals("/loginProc.do")) { // 로그인 후 mainform.jsp로 이동
 			String userId = request.getParameter("userId");
 			String userPwd = request.getParameter("userPwd");
-			System.out.println("Controller userId "+ userId);
 
 			if (userId.isEmpty() || userPwd.isEmpty()) {
 				RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
 				rd.forward(request, response);
 			}
 			HashMap<String, Object> map = adao.loginCheck(userId, userPwd);
-			System.out.println(" Controller  map : " +  map.get("key"));
 			if (Integer.parseInt(map.get("key").toString()) == 1) {
 				request.setAttribute("user", map.get("user"));
 			}
@@ -148,7 +147,6 @@ public class AcademyController extends HttpServlet {
 			request.setAttribute("nvo", adao.selectNotice(boardNo));
 			request.setAttribute("cvoList", adao.selectComments(boardNo));
 			request.setAttribute("commentCount", adao.commentCount(boardNo));
-			System.out.println("commentCount : "+adao.commentCount(boardNo));
 			RequestDispatcher rd = request.getRequestDispatcher("detailView.jsp");
 			rd.forward(request, response);
 		} else if (cmd.equals("/updelProc.do")) {
@@ -180,18 +178,21 @@ public class AcademyController extends HttpServlet {
 		} else if (cmd.equals("/mainform.do")) { // 메인폼에서 수강과목 클릭시 subject_main.jsp로 이동
 			HttpSession session = request.getSession();
 			uvo = (UserVO) session.getAttribute("user");
-			
+
 			nvo2 = adao.selectBoardAll2(request.getParameter("subjectName"));
+			svoList = adao.selectSyllabus(request.getParameter("subjectName"));
+
+			request.setAttribute("sylla", svoList); // 강의계획서 제목, 주차 델꼬오기
 			request.setAttribute("test", nvo2);
-			
-			//과목 파악해서 맞으면 subject_main.jsp로 이동 아니면 다시 홈화면으로 이동
-			if(request.getParameter("subjectName").equals(uvo.getSubjectName())) { //누른거랑 똑같은거면 걸로 ㄱ
+
+			// 과목 파악해서 맞으면 subject_main.jsp로 이동 아니면 다시 홈화면으로 이동
+			if (request.getParameter("subjectName").equals(uvo.getSubjectName())) { // 누른거랑 똑같은거면 걸로 ㄱ
 				RequestDispatcher rd = request.getRequestDispatcher("subject_main.jsp");
 				rd.forward(request, response);
-			}
-			else {			//아니면 고 백 홈~
-				PrintWriter out = response.getWriter();
-				out.println("<script> alert('수강중인 과목이 아닙니다.\\n -관리자에게 문의해주시기 바랍니다.'); location.href='goHome.do';</script>");
+			} else { // 아니면 고 백 홈~
+				out = response.getWriter();
+				out.println(
+						"<script> alert('수강중인 과목이 아닙니다.\\n -관리자에게 문의해주시기 바랍니다.'); location.href='goHome.do';</script>");
 				out.flush();
 			}
 		} else if (cmd.equals("/cWriteProc.do")) {
@@ -230,15 +231,13 @@ public class AcademyController extends HttpServlet {
 
 			HttpSession session = request.getSession();
 			String userId = (String) session.getAttribute("userId");
-
-			System.out.println("userId >>" + userId);
 			uvo = adao.selectUser(userId);
 			request.setAttribute("item", uvo);
 
 			RequestDispatcher rd = request.getRequestDispatcher("/mypageUpdate.jsp");
 			rd.forward(request, response);
 
-		} else if (cmd.equals("/mypageUpdateProc.do")) {
+		}  else if (cmd.equals("/mypageUpdateProc.do")) {
 
 			HttpSession session = request.getSession();
 			String userId = (String) session.getAttribute("userId");
@@ -249,7 +248,7 @@ public class AcademyController extends HttpServlet {
 			String phoneNo = request.getParameter("phoneNo");
 			String email = request.getParameter("email");
 
-			System.out.println(adao.mypageUpdate(new UserVO(userId, userName, userPwd, phoneNo, email)));
+			adao.mypageUpdate(new UserVO(userId, userName, userPwd, phoneNo, email));
 
 			RequestDispatcher rd = request.getRequestDispatcher("mypage.do");
 			rd.forward(request, response);
@@ -325,12 +324,14 @@ public class AcademyController extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("AdetailViewProc.do");
 			rd.forward(request, response);
 		} else if (cmd.equals("/Logout.do")) {
-			HttpSession session = request.getSession();
-			session.invalidate();
-
-			RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
-			rd.forward(request, response);
-		} else if (cmd.equals("/goHome.do")) {   //홈버튼 클릭시 메인폼으로
+	         HttpSession session = request.getSession();
+	         session.invalidate();
+	         
+	         out = response.getWriter();
+	         out.println(
+	               "<script> alert('정상적으로 로그아웃되었습니다.'); location.href='login.jsp';</script>");
+	         out.flush();
+	      } else if (cmd.equals("/goHome.do")) {   //홈버튼 클릭시 메인폼으로
 			request.setAttribute("adao", adao.selectBoardAll());
 			request.setAttribute("Aadao", adao.AselectBoardAll());
 			RequestDispatcher rd = request.getRequestDispatcher("mainform.jsp");
@@ -353,7 +354,6 @@ public class AcademyController extends HttpServlet {
 			String subjectName = request.getParameter("subjectName");
 			fvoList = adao.selectFileAll(subjectName);
 			request.setAttribute("fvoList", fvoList);
-			System.out.println("subjectName from dataViewProc 출력되냐????"+subjectName);
 			RequestDispatcher rd = request.getRequestDispatcher("dataView.jsp");
 			rd.forward(request, response);
 		}else if(cmd.equals("/dataWriteCheck.do")) {
@@ -388,7 +388,6 @@ public class AcademyController extends HttpServlet {
 				RequestDispatcher rd= request.getRequestDispatcher("dataViewProc.do?subjectName="+subjectName);
 				rd.forward(request, response);
 			}catch(Exception e){
-				System.out.print("업로드 오류 발생");
 				e.printStackTrace();
 			}
 		}else if(cmd.equals("/downloadProc.do")) { //file download
@@ -438,12 +437,18 @@ public class AcademyController extends HttpServlet {
 	
 			RequestDispatcher rd = request.getRequestDispatcher("dataDetailView.jsp");
 			rd.forward(request, response);
+			
 		}else if(cmd.equals("/dataUpdelProc.do")) {
 			//자료실 수정 삭제 판별
 			String btn=request.getParameter("threebtn");
 			int boardNo=Integer.parseInt(request.getParameter("boardNo"));
+			
 			if(btn.equals("수정")) {
+				request.setAttribute("fvo", adao.selectFile(boardNo));
 				
+				RequestDispatcher rd = request.getRequestDispatcher("dataUpdateForm.jsp");
+	            rd.forward(request, response);
+
 			}else {
 				//삭제
 				adao.deleteFile(boardNo);
@@ -452,6 +457,18 @@ public class AcademyController extends HttpServlet {
 				rd.forward(request, response);
 			}
 			
+		}else if(cmd.equals("/dataUpdateProc.do")) {      
+	         int boardNo = Integer.parseInt(request.getParameter("boardNo"));
+	         String title = request.getParameter("title");
+	         String content = request.getParameter("content");
+	         String subjectName= request.getParameter("subjectName");
+	         
+	         fvo = new FileVO(title, content, boardNo);         
+	         adao.dataUpdate(fvo);
+	         request.setAttribute("boardNo", boardNo);
+	         
+	         RequestDispatcher rd = request.getRequestDispatcher("dataViewProc.do?subjectName="+subjectName);
+	         rd.forward(request, response);
 		}else if (cmd.equals("/syllabus.do")) { // 강의계획서 리스트
 			svoList = adao.selectSyllabusAll(request.getParameter("subjectName"));
 			request.setAttribute("svoList", svoList);
