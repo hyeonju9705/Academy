@@ -2,7 +2,8 @@
 컴퓨터학원 eclass 제작
  
  project 폴더가 최근폴더
- 
+ mainform.jsp의 <script>부분의 refer header 부분 url의 서버포트를 로컬에 맞게 다시 설정해야 로그인 시, alert창이 열림, 또한 Path를 /Academy 로 지정
+ url : Academy/login.jsp 가 처음 시작 페이지
 <br><br>
 개발환경, 언어 및 툴 : Java SE 11, jdk 11,tomcat 9.0, My SQL, MySQL Workbench, javaScript
 
