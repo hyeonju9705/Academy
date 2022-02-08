@@ -21,3 +21,6 @@ Jsp와 servlet을 이해하고 spring으로 넘어가기 위해서 협업하며 
 4. controller에서 actiondo로 이동할 때에 데이터이동에 대해서 확실하게 알게됨 -> do에서 do로 이동할 때에 데이터 처리방식에대해 고민할 계기가 됨
 5. actionDo 및 UTF-8의 남용시 ??? 출력 에 대해 알게되었음( request.setCharacterEncoding("utf-8");과 <br>또 깨질시에 response.setContentType("text/html; charset=utf-8")을 사용해야하는것을 알게됨
 6. db설계가 굉장히 중요하다는 것을 알게됨. 처음에 만든 테이블을 드롭하고 계속 새롭게 만들면서 느낌... ex) 과목별로 유저가 게시글을 보고싶다면 과목을 외래키로 지정햇어야함..
+ 
+ #PPT
+<iframe src="https://docs.google.com/presentation/d/e/2PACX-1vQj_t2NMdfFXIPa0oyF023v9U9GZ00M0VIR3EVi1pOg9xF61G4ZbT2JxK1IhpVluPbGA-XnQ2Sbra7d/embed?start=false&loop=false&delayms=3000" frameborder="0" width="960" height="569" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
